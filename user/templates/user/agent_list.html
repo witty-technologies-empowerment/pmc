@@ -1,0 +1,174 @@
+{% include "userbase.html" %}
+{% load staticfiles %}
+            <div class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card shadow-lg bg-white rounded">
+                                <div class="card-header">
+                                    <h4 class="card-title"><a href="{% url 'users:request' %}">< Home</a> | Select an agent from the list &nbsp; &nbsp; <small>Current Location: <span id="loco"></span></small></h4>
+                                    <p class="card-category fs-10">Switch to 
+                                        <a href="">map view</a>
+                                    </p>
+                                </div>
+                                <div class="card-body all-icons">
+                                    <div class="row">
+
+                                      {% if all_listx %}
+                                      {% for details in all_listx %}
+                                      <div class="col-md-4 mt-2 mb-2">
+                            <div class="card card-user shadow bg-white rounded">
+                                <div class="card-image">
+                                    <img src="https://ununsplash.imgix.net/photo-1431578500526-4d9613015464?fit=crop&fm=jpg&h=300&q=75&w=400" alt="...">
+                                </div>
+                                <div class="card-body">
+                                    <div class="author">
+                                          {% if details.agent_image %}
+                                          {% for item in details.agent_image %}
+                                          <img class="avatar border-gray" src="{{item.picture.url}}" alt="... Agent Image">
+                                          {% endfor %}
+                                          {% else %}
+                                        <img class="avatar border-gray" src="{% static 'user/img/img_avatar1-1.png' %}" alt="... no agent image" >
+                                        {% endif %}
+                                            <h5 class="title text-info">{{ details.agent_fName | title }} {{ details.agent_lName | title }} </h5>
+                                        <p class="description">
+                                            {% if details.agent_rating %} {% for item in details.agent_rating %} {% if item.average_rating == '0' %}<p>This agent has not done nor completed any transaction</p> {% elif item.average_rating == '100' %} <img src="{%static 'star.svg' %}" width="12" height="12" alt=""> <img src="{%static 'star.svg' %}" width="12" height="12" alt=""> <img src="{%static 'star.svg' %}" width="12" height="12" alt=""> <img src="{%static 'star.svg' %}" width="12" height="12" alt=""> <img src="{%static 'star.svg' %}" width="12" height="12" alt="">{% elif item.average_rating > '80' %} <img src="{%static 'star.svg' %}" width="12" height="12" alt=""> <img src="{%static 'star.svg' %}" width="12" height="12" alt=""> <img src="{%static 'star.svg' %}" width="12" height="12" alt=""> <img src="{%static 'star.svg' %}" width="12" height="12" alt=""> <img src="{%static 'star.svg' %}" width="12" height="12" alt=""> {% elif item.average_rating > '60' %} <span> <img src="{%static 'star.svg' %}" width="12" height="12" alt=""> <img src="{%static 'star.svg' %}" width="12" height="12" alt=""> <img src="{%static 'star.svg' %}" width="12" height="12" alt=""> <img src="{%static 'star.svg' %}" width="12" height="12" alt=""> {% elif item.average_rating > '40' %} <span> <img src="{%static 'star.svg' %}" width="12" height="12" alt=""> <img src="{%static 'star.svg' %}" width="12" height="12" alt=""> <img src="{%static 'star.svg' %}" width="12" height="12" alt=""> {% elif item.average_rating > '20' %} <span> <img src="{%static 'star.svg' %}" width="12" height="12" alt=""> <img src="{%static 'star.svg' %}" width="12" height="12" alt=""> {% else %} <span> <img src="{%static 'star.svg' %}" width="12" height="12" alt=""> {% endif %} {% endfor %} {% else %}<p style="border: 2px dotted red;border-radius: 3px">This agent is yet to completed any transaction</p> {% endif %}
+                                        </p>
+                                    </div>
+                                    <p class="description text-center">
+                                        <i class="fa fa-user-circle-o text-info pr-2"></i>{{ details.agent_name | title }}
+                                        <br><i class="fa fa-map-marker text-danger pr-2"></i> {{ details.agent_location | title }}
+                                        <br> <small><i class="fa fa-vcard-o text-info pr-2"></i><b>Member since </b> <span><i>{{details.date_join_v1}}</span></i></small>
+                                        <br> <small><i class="fa fa-clock-o text-info pr-2"></i><b>Last Time Active </b> <span><i>{{details.session}}</span></i></small>
+                                    </p>
+                                </div>
+                                <hr>
+                                <div class="button-container mr-auto ml-auto">
+                            <form action="{% url 'users:agent_selected' details=details.agent_name RCode=details.RCode amount=details.amount_request sent=details.sent others=details %}" method="POST">
+                            <button type="submit" formaction="{% url 'users:view_agent' amount=details.amount_request agent=details.agent_name %}" class="btn btn-social btn-outline btn-twitter btn-round mt-2 mb-2 ml-1"><i class="fa fa-map-o"></i> · Show on map</button>
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-social btn-outline btn-facebook btn-round mt-2 mb-2 ml-1"><i class="fa fa-check"></i> · Select</button>
+                            </form>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                      {% else %}
+                      <div class="col-lg-6 col-md-6 col-sm-6 col-6">
+                            <div class="font-icon-detail">
+                                <p style="color: red">There are no agent available.</p>
+                            </div>
+                        </div>
+                      {% endif %}
+
+
+                            
+
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+            <footer class="footer">
+                <div class="container">
+                    <nav>
+                        <ul class="footer-menu">
+                            <li>
+                                <a style="font-family: 'Ubuntu', sans-serif;color: purple;font-size: 20px;" href="{% url 'index' %}">
+                                    PassMeCash
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'index' %}">
+                                    Home
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'index' %}">
+                                    Company
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'index' %}">
+                                    Social
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    Blog
+                                </a>
+                            </li>
+                        </ul>
+                        <p class="copyright text-center">
+                            ©
+                            <script>
+                                document.write(new Date().getFullYear())
+                            </script>
+                            <a href="{% url 'index' %}">PassMeCash</a>, made to reverse the banking system
+                        </p>
+                    </nav>
+                </div>
+            </footer>
+        </div>
+    </div>
+    <script>
+      // Facebook Pixel Code Don't Delete
+      !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+        n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+        document,'script','//connect.facebook.net/en_US/fbevents.js');
+
+      try{
+        fbq('init', '111649226022273');
+        fbq('track', "PageView");
+
+      }catch(err) {
+        console.log('Facebook Track Error:', err);
+      }
+    </script>
+    <noscript>
+      <img height="1" width="1" style="display:none"
+      src="https://www.facebook.com/tr?id=111649226022273&ev=PageView&noscript=1"
+      />
+    </noscript>
+</body>
+<!--   Core JS Files   -->
+<script src="{% static 'dashboard/assets/js/jQuery-v3.2.1.min.js' %}" type="text/javascript"></script>
+<script src="{% static 'dashboard/assets/js/popper.min.js' %}" type="text/javascript"></script>
+<script src="{% static 'dashboard/assets/js/bootstrap.min.js' %}" type="text/javascript"></script>
+<!--  Plugin for Switches, full documentation here: https://www.jque.re/plugins/version3/bootstrap.switch/ -->
+<script src="{% static 'dashboard/assets/js/bootstrap-swicth.js' %}"></script>
+<!--  Google Maps Plugin    -->
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB2Yno10-YTnLjjn_Vtk0V8cdcY5lC4plU"></script>
+<!--  Chartist Plugin  -->
+<script src="{% static 'dashboard/assets/js/chartist.min.js' %}"></script>
+<!--  Share Plugin -->
+<script src="{% static 'dashboard/assets/js/jquery.sharrre.js' %}"></script>
+<!--  Notifications Plugin    -->
+<script src="{% static 'dashboard/assets/js/bootstrap-notify.js' %}"></script>
+<!-- Control Center for Light Bootstrap Dashboard: scripts for the example pages etc -->
+<script src="{% static 'dashboard/assets/js/light-bootstrap-dashboard.js' %}" type="text/javascript"></script>
+<!-- Light Bootstrap Dashboard DEMO methods, don't include it in your project! -->
+<script src="{% static 'dashboard/assets/js/main.js' %}"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        // Javascript method's body can be found in assets/js/main.js
+        demo.initDashboardPageCharts();
+
+        demo.showNotification2();
+
+        // demo.showLocation();
+
+    });
+    var getPlace = sessionStorage.getItem('place')
+    if (getPlace != null) {
+        recent = localStorage.getItem('place')
+        document.getElementById('loco').innerHTML = recent
+    };
+</script>
+
+</html>

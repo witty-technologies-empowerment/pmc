@@ -1,0 +1,111 @@
+{% include "agentbase.html" %}
+{% load staticfiles %}
+
+<section class="content">
+    <div class="container-fluid">
+      <!-- Small boxes (Stat box) -->
+      
+      <!-- /.row -->
+      <!-- Main row -->
+      <div class="row">
+        <!-- Left col -->
+        <section class="col-lg-7 connectedSortable">
+            <!-- Custom tabs (Charts with tabs)-->
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">Set your limit</h3>
+              </div>
+              <!-- /.card-header -->
+              <!-- form start -->
+              <form role="form">
+                <div class="card-body">
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Enter Amount</label>
+                    <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><b>N</b></span>
+                </div>
+                <input type="text" class="form-control">
+                <div class="input-group-append">
+                  <span class="input-group-text"><b>.00</b></span>
+                  </div>
+                </div>
+                  <div class="form-group m-3">
+                    <div class="custom-control custom-checkbox">
+                      <input type="checkbox" name="terms" class="custom-control-input" id="exampleCheck1">
+                      <label class="custom-control-label" for="exampleCheck1">I agree to the <a href="#">terms of service</a>.</label>
+                    </div>
+                  </div>
+                </div>
+                <!-- /.card-body -->
+
+                <div class="card-footer">
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+              </form>
+            </div>
+            <!-- /.card -->
+
+
+            <!-- TO DO List -->
+            <!-- /.card -->
+          </section>
+        <!-- /.Left col -->
+        <!-- right col (We are only adding the ID to make the widgets sortable)-->
+        <section class="col-lg-5 connectedSortable">
+
+          <!-- Map card -->
+          <div class="col-md-13">
+          
+          <!-- /.card -->
+        </div>
+        <div class="card">
+            <div class="card-header bg-danger">
+              <h3 class="card-title ">IMPORTANT NOTICE </h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+                <h5><b>NOTE:</b> Please be informed that Transaction process will take 30 - 45 mintues  for process and confirmation <br> or less</h5>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <div class="card">
+            <div class="card-header bg-info">
+              <h3 class="card-title">Account Balance </h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+              <div class="progress mb-3">
+                <div class="progress-bar bg-success" role="progressbar" aria-valuenow="100" aria-valuemin="0"
+                     aria-valuemax="100" style="width: 100%">
+                  <span class="sr-onlys">100% Left (N10,000)</span>
+                </div>
+              </div>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <div class="card">
+            <div class="card-header bg-info">
+              <h3 class="card-title">Withdrawal Balance </h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+              <div class="progress mb-3">
+                <div class="progress-bar bg-info" role="progressbar" aria-valuenow="50" aria-valuemin="0"
+                     aria-valuemax="50" style="width: 50%">
+                  <span class="sr-onlys">50% More (N5,000)</span>
+                </div>
+              </div>
+            </div>
+            <!-- /.card-body -->
+          </div>
+        </section>
+        <!-- right col -->
+      </div>
+      <!-- /.row (main row) -->
+    </div><!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
+  {% include "popup.html" %}
+
+  {% include "dbase.html" %}

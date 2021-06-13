@@ -1,0 +1,93 @@
+{% include "base1.html" %}
+{% load staticfiles %}
+<body>
+<section class="centered">
+    <div class="typewriter">
+    <div class="lds-hourglass"></div>
+  <h1>Transaction in Process</h1>
+</div>
+</section>
+{% for item in list %}
+{% if item.v1 == 0 %}
+<script>
+swal({
+  title: "{{ item.v3 }}",
+  text: "... Please wait {% if status %}{{status}}{% endif %}",
+  timer: 3000,
+});
+</script>
+</body>
+</html>
+{% elif item.v1 == 1.1 %}
+<script>
+swal({
+  title: "{{ item.v3 }}",
+  text: "... Please wait {% if status %}{{status}}{% endif %}",
+});
+</script>
+</body>
+</html>
+{% elif item.v1 == 1 %}
+<script>
+    swal({
+  title: "{{ item.v3 }}",
+  text: "{{ item.v2 }}",
+  icon: "success",
+});
+</script>
+</body>
+</html>
+{% elif item.v1 == 2 %}
+<script>
+    swal("Good job!", "You clicked the button! {% if num %}{{num}}{% endif %}", "info");
+</script>
+</body>
+</html>
+{% elif item.v1 == 3 %}
+<script>
+    swal({
+  title: "{{ item.v3 }}",
+  text: "{{ item.v2 }}",
+  icon: "warning",
+});
+</script>
+</body>
+</html>
+{% elif item.v1 == 3.5 %}
+<script>
+    swal({
+  title: "{{ item.v3 }}",
+  text: "{{ item.v2 }}",
+  icon: "info",
+});
+</script>
+</body>
+</html>
+{% elif item.v1 == 3.7 %}
+<script>
+    swal({
+  title: "{{ item.v3 }}",
+  text: "{{ item.v2 }} {{ item.v4 }}",
+  icon: "warning",
+});
+</script>
+</body>
+</html>
+{% elif item.v1 >= 4 %}
+<script>
+    swal({
+  title: "{{ item.v3 }}",
+  text: "{{ item.v2 }}",
+  icon: "error",
+});
+</script>
+</body>
+</html>
+{% endif %}
+{% endfor %}
+
+{% if amount %}
+{% if declined %}
+<a href="{% url 'users:agent_list' amount=amount %}">{{ declined }} </a>
+{% endif %}
+{% endif %}

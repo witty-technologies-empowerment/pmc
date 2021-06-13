@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	{% load staticfiles %}
+	<title>PMC Payment Checkout</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="{% static 'images/icons/favicon.ico' %}"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'fonts/iconic/css/material-design-iconic-font.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/animate/animate.css' %}">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/css-hamburgers/hamburgers.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/animsition/css/animsition.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/select2/select2.min.css' %}">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/daterangepicker/daterangepicker.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'css/util.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+<!--===============================================================================================-->
+	<script src="https://js.paystack.co/v1/inline.js"></script>
+<!--===============================================================================================-->
+<!-- sweetalert-docs -->
+  <script src="{% static 'vendor/sweetalert/sweetalert.min.js' %}"></script>
+  <!--===============================================================================================-->
+</head>
+<body>
+	
+	<div class="limiter">
+		<div class="container-login100" style="background-image: url({% static 'images/bg-01.jpg' %});">
+			<div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
+				<form class="login100-form validate-form" action="." method="POST" onsubmit="return false">
+					{% csrf_token %}
+					<span class="login100-form-title p-b-49">
+						PMC - Checkout
+					</span>
+					{% if details %}
+					<div class="wrap-input100 validate-input m-b-23" data-validate = "Amount is reauired">
+						<span class="label-input100">Amount = {{ amount }}</span><span class="label-input100">+ {{ charge }}<sup style="color:red;">charge</sup></span>
+						<input class="input100" type="text" name="amount" disabled id="amount" placeholder="{{ total }}" value="{{ total }}">
+						<span class="focus-input100" data-symbol="&#xf198;"></span>
+					</div>
+
+					<div class="container-login100-form-btn">
+						<div class="wrap-login100-form-btn">
+							<div class="login100-form-bgbtn"></div>
+							<button class="login100-form-btn" onclick="payWithPaystack()">
+								Pay with Paystack
+							</button>
+						</div>
+					</div>
+
+					<div class="txt1 text-center p-t-54 p-b-20">
+						<span>
+							Or Pay using
+						</span>
+					</div>
+
+					<div class="flex-c-m">
+						<a href="#" class="login100-social-item bg1">
+							<img src="{% static 'rave.png' %}" height="47" width="47">
+						</a>
+
+						<a href="#" class="login100-social-item bg2">
+							<img src="{% static 'inter.png' %}" height="47" width="47">
+						</a>
+
+						<a href="#" class="login100-social-item bg3">
+							<img src="{% static 'ussd.png' %}" height="47" width="47">
+						</a>
+					</div>
+					{% else %}
+					<strong>{{ note }}</strong>
+					<br>
+					 Go > <a href="{% url 'users:request' %}">Home</a>
+					{% endif %}
+				</form>
+			</div>
+		</div>
+	</div>
+	
+
+	<div id="dropDownSelect1"></div>
+	
+<!--===============================================================================================-->
+		{% if details %}
+		{% for item in details %}
+	<script>
+    var amounts = document.getElementById("amount").value+'00';
+	function payWithPaystack(){
+    var handler = PaystackPop.setup({
+      key: 'pk_test_d9a844b1b1e27b4a2ea31eeedfcd7c6ca67c9662',
+      email: '{{email}}',
+      amount: amounts,
+      currency: "NGN",
+      ref: '{{ refcode }}',
+      metadata: {
+         custom_fields: [
+            {
+                display_name: "Mobile Number",
+                variable_name: "mobile_number",
+                value: "{{ telephone }}"
+            },
+            {
+                display_name: "User Name",
+                variable_name: "user_name",
+                value: "{{ full_name }}"
+            },
+            {
+                display_name: "Agent Name",
+                variable_name: "agent_name",
+                value: "{{ agent }}"
+            },
+            {
+                display_name: "Transaction Date",
+                variable_name: "transaction_date",
+                value: "{{ date }}"
+            },
+            {
+                display_name: "Transaction Time",
+                variable_name: "transaction_time",
+                value: "{{ time }}"
+            },
+            {
+                display_name: "Pattern Key",
+                variable_name: "pattern_key",
+                value: "{{ item.patternkey }}"
+            },
+            {
+                display_name: "Agent Name",
+                variable_name: "agent_name",
+                value: "{{ agent }}"
+            }
+         ]
+      },
+      callback: function(response){
+      		swal({
+	          title: "Transaction "+response.status +"ful ",
+	          text: "Transaction with ref "+ response.reference+" was successful "+ response.message,
+	          icon: "success",
+	        });
+          console.log(response);
+          window.location.replace("http://passmecash.com/checkout/payment/!/process/refcode=!{{ refcode }}/PatternKey=!{{ item.patternkey }}/successful=!True");
+      },
+      onClose: function(response){
+      		swal({
+	          title: "Transaction Window closed ",
+	          text: "Transaction will be marked failed",
+	          icon: "warning",
+	        });
+          //alert('window closed, Transaction will be maked failed');
+          window.location.replace("http://passmecash.com/checkout/payment/!/process/refcode=!{{ refcode }}/PatternKey=!{{ item.patternkey }}/successful=!False");
+      },
+
+    });
+    handler.openIframe();
+  }
+</script>
+{% endfor %}
+  {% else %}
+  Nil Transaction
+  {% endif %}
+<!--===============================================================================================-->
+	<script src="{% static 'vendor/jquery/jquery-3.2.1.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'vendor/animsition/js/animsition.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'vendor/bootstrap/js/popper.js' %}"></script>
+	<script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'vendor/select2/select2.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'vendor/daterangepicker/moment.min.js' %}"></script>
+	<script src="{% static 'vendor/daterangepicker/daterangepicker.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'vendor/countdowntime/countdowntime.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'js/main.js' %}"></script>
+
+</body>
+</html>

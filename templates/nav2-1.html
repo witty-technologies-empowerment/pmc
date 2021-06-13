@@ -1,0 +1,139 @@
+<style type="text/css">
+  .pmc-class {
+      text-align: center;
+      margin-top: 50px;
+  }
+  #amount {
+    width: 280px;
+    display: inline-block;
+  }
+  .username {
+    color: purple;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 30px;
+    font-weight: 400;
+  }
+  .image-cropper {
+    widows: 40px;
+    height: 40px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 50%;
+    border: 2px solid #aaa;
+}
+.profile-pic {
+  display: inline;
+  margin: 0 auto;
+  height: 100%;
+  width: auto;
+}
+a.add {
+  color: #ccc;
+  text-decoration: none;
+}
+
+a.add:hover {
+  color: #fff;
+  text-decoration: none;
+}
+body {
+  margin-top: 90px;
+  background-color: #fffcf5;
+}
+
+
+    ul        {
+      margin-bottom: 0;
+    }
+    .accordion  {
+      background: #FFF;
+      border-radius: 5px;
+      padding: 30px;
+    }
+
+    .question {
+      border-top: 2px solid #EEE;
+      padding: 20px;
+      cursor: pointer;
+      position: relative;
+    }
+    .question h2  {
+      font-size: 20px;
+      margin: 0;
+      color: #C00C00;
+    }
+    .question .glyphicon {
+      position: absolute;
+      right: 20px;
+      top: 0;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      color: #C00C00;
+      transition: 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) all;
+    }
+
+    .answer   {
+      max-height: 0;
+      overflow: hidden;
+      transition: 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) all;
+    }
+    .answer p {
+      padding: 20px;
+    }
+
+    .accordion li.open .question .glyphicon {
+      transform: rotate(180deg);
+    }
+    .accordion li.open .answer  {
+      max-height: 100%;
+    }
+    
+  </style>
+
+<nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand pmc-logo-head" href="{% url 'agents:dashboard' %}">PassMeCash</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'agents:dashboard' %}">Home <span class="sr-only"></span></a>
+      </li>
+      <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Action</a>
+    <div class="dropdown-menu">
+      <a class="dropdown-item" href="{% url 'coming' link='agents:dashboard' %}">Action</a>
+      <a class="dropdown-item" href="{% url 'coming' link='agents:dashboard' %}">Another action</a>
+      <a class="dropdown-item" href="{% url 'coming' link='agents:dashboard' %}">Something else here</a>
+      <div class="dropdown-divider"></div>
+      <a class="dropdown-item" href="{% url 'coming' link='agents:dashboard' %}">Separated link</a>
+    </div>
+  </li>
+    </ul>
+    <ul>
+  <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    {{ user.username | title }} &nbsp;
+  </button>
+  <div class="btn-group dropleft">
+        {% if profile_image %}
+        {% for item in profile_image %}
+        <div class="image-cropper">
+        <img src="{{ item.picture.url }}" alt="avatar" class="profile-pic">
+        </div> &nbsp; &nbsp;
+        {% endfor %}
+        {% endif %}
+  <div class="dropdown-menu">
+    <!-- Dropdown menu links -->
+          <a class="dropdown-item" href="{% url 'coming' link='agents:dashboard' %}">Account</a>
+          <a class="dropdown-item" href="{% url 'coming' link='agents:dashboard' %}">Settings</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="{% url 'logout' %}"> Logout</a>
+  </div>
+</div>
+
+    </ul>
+  </div>
+</nav>

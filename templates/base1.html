@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load staticfiles %}
+	{% if timed %}
+    <meta http-equiv="refresh" content="{{timed}}"/>
+    {% else %}
+    <meta http-equiv="refresh" content="10000"/>
+    {% endif %}
+    <meta charset="UTF-8">
+    <title>{{ user.username | title }} - PMC | PassMe Cash Page</title>
+      <!-- sweetalert-docs -->
+  <script src="{% static 'vendor/sweetalert/sweetalert.min.js' %}"></script>
+</head>
+<style>
+.centered{position:fixed;top:24%;left:33.5%;margin-top:-50px;margin-left:-100px;width:600px;height:400px;background-color:#eee;border:2px white solid;border-radius:8px;padding:5px;opacity:0.8}
+.lds-hourglass {
+  display: inline-block;
+  position: relative;
+  text-align: center;
+  width: 64px;
+  height: 64px;
+}
+.lds-hourglass:after {
+  content: " ";
+  display: block;
+  border-radius: 50%;
+  width: 0;
+  height: 0;
+  margin: 6px;
+  box-sizing: border-box;
+  border: 26px solid purple;
+  border-color: purple transparent purple transparent;
+  animation: lds-hourglass 2.5s infinite;
+}
+@keyframes lds-hourglass {
+  0% {
+    transform: rotate(0);
+    animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+  }
+  50% {
+    transform: rotate(900deg);
+    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+  }
+  100% {
+    transform: rotate(1800deg);
+  }
+}
+
+
+/* DEMO-SPECIFIC STYLES */
+.typewriter h1 {
+  color: #blue;
+  font-family: monospace;
+  overflow: hidden; /* Ensures the content is not revealed until the animation */
+  border-right: .15em solid orange; /* The typwriter cursor */
+  white-space: nowrap; /* Keeps the content on a single line */
+  margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+  letter-spacing: .15em; /* Adjust as needed */
+  animation: 
+    typing 3.5s steps(30, end),
+    blink-caret .5s step-end infinite;
+}
+
+/* The typing effect */
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+/* The typewriter cursor effect */
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: orange }
+}
+</style>

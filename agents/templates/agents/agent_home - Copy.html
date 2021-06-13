@@ -1,0 +1,538 @@
+{% include "base2-1.html" %}
+{% load staticfiles %}
+<script type="text/javascript">
+  $( function() {
+    $( "#accordion" ).accordion();
+  } );
+</script>
+<body>
+  <!-- search by Angolia-->
+  {% if messages %}
+  {% for message in messages %}
+  <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+      <strong>{{ user.username | title }}</strong> {{ message }} <a href="{% url 'receiver:home' %}" onclick="locationGet()">reload</a>
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    {% endfor%}
+    {% endif %}
+  {% if message %}
+  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+  {% endif %}
+
+
+    <div style="position: fixed;" id="saside">
+      <div class="menu-float">
+        <div class="container demo-5 ">
+          <div id="dl-menu" class="dl-menuwrapper animated zoomIn">
+            <button class="dl-trigger">Open Menu</button>
+            <ul class="dl-menu">
+                <li>
+                <a class="add" href="#">Profile</a>
+                <ul class="dl-submenu">
+                  <li><a class="add" href="{% url 'coming' link='agents:dashboard' %}">View Profile</a></li>
+                    <li><a class="add" href="{% url 'coming' link='agents:dashboard' %}">Update Details</a></li>
+                    <li><a class="add" href="{% url 'coming' link='agents:dashboard' %}">Change Location</a></li>
+                  <li><a class="add" href="{% url 'coming' link='agents:dashboard' %}">Check Progress</a></li>
+                </ul>
+              </li>
+              <li>
+                <a class="add" href="{% url 'coming' link='agents:dashboard' %}">Transaction</a>
+                <ul class="dl-submenu">
+                  <li>
+                    <a class="add" href="{% url 'coming' link='agents:dashboard' %}">History</a>
+                    <ul class="dl-submenu">
+                      <li><a class="add" href="{% url 'agents:dashboard' %}">Request History</a></li>
+                      <li><a class="add" href="{% url 'coming' link='agents:dashboard' %}">Withdraw History</a></li>
+                    </ul>
+                  </li>
+                  <li>
+                    <a class="add" href="{% url 'coming' link='agents:dashboard' %}">Top Up</a>
+                    <ul class="dl-submenu">
+                      <li><a class="add" href="{% url 'coming' link='agents:dashboard' %}">Increase your remite</a></li>
+                    </ul>
+                  </li>
+                  <li>
+                    <a class="add" href="{% url 'coming' link='agents:dashboard' %}">Withdraw</a>
+                    <ul class="dl-submenu">
+                      <li><a class="add" href="{% url 'coming' link='agents:dashboard' %}">Cash Out</a></li>
+                      <li><a class="add" href="{% url 'coming' link='agents:dashboard' %}">Change Bank</a></li>
+                    </ul>
+                  </li>
+                    <li>
+                    <a class="add" href="{% url 'coming' link='agents:dashboard' %}">Balance</a>
+                    <ul class="dl-submenu">
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <a class="add" href="{% url 'coming' link='agents:dashboard' %}">Account</a>
+                <ul class="dl-submenu">
+                  <li><a class="add" href="{% url 'coming' link='agents:dashboard' %}">Add New Bank</a></li>
+                    <li><a class="add" href="{% url 'coming' link='agents:dashboard' %}">Account Balance</a></li>
+                    <li><a class="add" href="{% url 'coming' link='agents:dashboard' %}">Account History</a></li>
+                  <li>
+                    <a class="add" href="{% url 'coming' link='agents:dashboard' %}">Set Request Limit</a>
+                    <ul class="dl-submenu">
+                      <li>
+                        <form class="form-inline" action="." method="POST">
+                          {% csrf_token %}
+                        <input type="text" id="set_limit" placeholder="Enter amount" name="set_limit" minlength="4" maxlength="5">
+                        <input class="pmcbtn pmcsend successbtn" type="submit" name="a" value="Set &nbsp">
+                      </form>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <!-- <li>
+                <a href="#">Empty</a>
+                <ul class="dl-submenu">
+                  <li>
+                    <a href="#">Empty</a>
+                    <ul class="dl-submenu">
+                      <li><a href="#">Empty</a></li>
+                      <li><a href="#">Empty</a></li>
+                      <li><a href="#">Empty</a></li>
+                      <li><a href="#">Empty</a></li>
+                    </ul>
+                  </li>
+                  <li>
+                    <a href="#">Bedroom</a>
+                    <ul class="dl-submenu">
+                      <li>
+                        <a href="#">Beds</a>
+                        <ul class="dl-submenu">
+                          <li><a href="#">Upholstered Beds</a></li>
+                          <li><a href="#">Divans</a></li>
+                          <li><a href="#">Metal Beds</a></li>
+                          <li><a href="#">Storage Beds</a></li>
+                          <li><a href="#">Wooden Beds</a></li>
+                          <li><a href="#">Children's Beds</a></li>
+                        </ul>
+                      </li>
+                      <li><a href="#">Bedroom Sets</a></li>
+                      <li><a href="#">Chests &amp; Dressers</a></li>
+                    </ul>
+                  </li>
+                  <li><a href="#">Home Office</a></li>
+                  <li><a href="#">Dining &amp; Bar</a></li>
+                  <li><a href="#">Patio</a></li>
+                </ul>
+              </li>-->
+                <li>
+                  <a class="add" href="#">Talk to us</a>
+                  <ul class="dl-submenu">
+                  <li><a class="add" href="tel:+23408106529115">Place a Call</a></li>
+                    <li><a class="add" href="mailto:mail.passmecash@gmail.com">mail@passmecash.com</a></li>
+                    <li><a class="add" href="sms:+23408106529115">Send and SMS</a></li>
+                    <li><a class="add" href="#">Talk to an Agent</a></li>
+                </ul>
+                </li>
+                <li><a class="add disabledx" href="{% url 'coming' link='agents:dashboard' %}">Settings</a></li>
+            </ul>
+          </div><!-- /dl-menuwrapper -->
+    </div><!-- /container -->
+      </div>
+	    <div class="pmc-class sidebar">
+    		<h4>Account Details <sup><small class="pmc_ad_link"><a href="{% url 'coming' link='agents:dashboard' %}">Edit</a></small></sup></h4>
+	     <hr class="my-1">
+          <ul class="list-group">
+  {% if arating %}
+  <li class="list-group-item">
+          <p>Account rating - <strong>{{ arating.rating }}%</strong>
+            {% if arating.rating == 0 %}
+             </li>
+            {% elif arating.rating > 80 %}
+                <img src="{%static 'star.svg' %}" width="12" height="12" alt="">
+                <img src="{%static 'star.svg' %}" width="12" height="12" alt="">
+                <img src="{%static 'star.svg' %}" width="12" height="12" alt="">
+              <img src="{%static 'star.svg' %}" width="12" height="12" alt="">
+              <img src="{%static 'star.svg' %}" width="12" height="12" alt="">
+              </span> <span style="color:gold;">Excellent</span>
+               </li>
+              {% elif arating.rating > 60 %}
+              <span>
+                <img src="{%static 'star.svg' %}" width="12" height="12" alt="">
+                <img src="{%static 'star.svg' %}" width="12" height="12" alt="">
+              <img src="{%static 'star.svg' %}" width="12" height="12" alt="">
+              <img src="{%static 'star.svg' %}" width="12" height="12" alt="">
+              </span> <span style="color:blue;">Great</span>
+               </li>
+              {% elif arating.rating > 40 %}
+              <span>
+                <img src="{%static 'star.svg' %}" width="12" height="12" alt="">
+              <img src="{%static 'star.svg' %}" width="12" height="12" alt="">
+              <img src="{%static 'star.svg' %}" width="12" height="12" alt="">
+              </span> <span style="color:green;">Good</span>
+               </li>
+              {% elif arating.rating > 20 %}
+              <span>
+              <img src="{%static 'star.svg' %}" width="12" height="12" alt="">
+              <img src="{%static 'star.svg' %}" width="12" height="12" alt="">
+              </span> <span style="color:orange;">Fair</span>
+               </li>
+              {% else %}
+              <span>
+                <img src="{%static 'star.svg' %}" width="12" height="12" alt="">
+              </span> <span style="color:red;">Poor</span>
+               </li>
+              {% endif %}
+            {% endif %}
+  <li class="list-group-item"><strong style="font-size: 18px">Username:</strong><small>  {{ user.username | title }}</small> </li>
+  <li class="list-group-item"><strong style="font-size: 18px">Name:</strong> <small> {{ user.first_name | title }} {{ user.last_name | title }} </small></li>
+  <li class="list-group-item"><strong style="font-size: 18px">Location:</strong><small>  {% for data in location %} {{ data.street }}, {{ data.city }}, {{ data.state }} {% endfor %}</small></li>
+  <li class="list-group-item"><strong style="font-size: 18px">Phone:</strong><small>  {% for data in telephone %} {{ data.telephone }} {% endfor %}</small></li>
+  <li class="list-group-item"><strong style="font-size: 18px">Email:</strong> <small> {{ user.email }}</small></li>
+</ul>
+
+		 </div>
+
+    </div>
+  	<div id="section">
+
+      {% if table10 %}
+      <div class="carouselz" data-flickity='{ "autoPlay": true  }'>
+        {% if zz %}
+  <div class="carousel-cella">
+    <p> you have received <span class="rounded-circle" style="padding:5px;border-radius:15px;border:1px solid blue;color:blue;"> {% for itm in zz %}{{itm.total}}{% endfor %} </span>  Request's</p>
+    <p> Accepted  <span class="rounded-circle" style="padding:5px;border-radius:15px;background-color:green;color:white;"> {% for itm in zz %}{{itm.accept}}{% endfor %} </span> in total</p>
+    <p> Declined <span class="rounded-circle" style="padding:5px;border-radius:15px;background-color:red;color:white;"> {% for itm in zz %}{{itm.declined}}{% endfor %} </span> in total</p>
+    <p> Expired <span class="rounded-circle" style="padding:5px;border-radius:13px;background-color:yellow;color:black;"> {% for itm in zz %}{{itm.expired}}{% endfor %} </span> in total</p>
+    {% else %}
+    <p> you have received <span style="padding:2px;background-color:yellow;color:black;"> 0 </span></p><br>
+    <p>No History Found</p>
+  {% endif %}
+          </div>
+        <div class="carousel-cella">
+    <p style="text-align: center;">Money in Account - {{ moneyavil }}
+      <br>
+      Profit - {{ profit }}
+      <br>
+      Total Fund that will be withdrawed = {{ total }}
+      <br>
+      Avilable for withdraw - {% if ready == yes %}{{ ready | upper}}{% else %}{{ ready |upper }}{% endif %}
+    </p>
+  </div>
+  <div class="carousel-cella">
+    <p><strong>NOTE:</strong> <br>{{ user.username | title }},  You need to <a href="{% url 'coming' link='agents:dashboard' %}" style="color:red;"> upgrade</a> your info to begin transaction</p>
+  </div>
+  <div class="carousel-cella">
+    <p style="text-align: center;"><strong>NOTE:</strong> Withdrawal of fund will only be avilable if total amount is above N10,000 <br>
+      or transaction is 7days from previous withdraw</p>
+  </div>
+</div>
+      <br>
+      <br>
+      {% if arating.rating > 1 %}
+      <div class="progress">
+  {% if rating %}<div class="progress-bar bg-success" role="progressbar" style="width: {{rating.rating1}}%" aria-valuenow="{{rating.rating1}}" aria-valuemin="0" aria-valuemax="100" data-toggle="tooltip" data-placement="bottom" title="{{rating.rating}}% Accepted">{{rating.rating}}%</div>{% endif %}
+  {% if rating2 %}<div class="progress-bar bg-danger" role="progressbar" style="width: {{rating2.rating2}}%" aria-valuenow="{{rating2.rating2}}" aria-valuemin="0" aria-valuemax="100" data-toggle="tooltip" data-placement="bottom" title="{{rating2.rating}}% Declined">{{rating2.rating}}%</div>{% endif %}
+  {% if rating3 %}<div class="progress-bar bg-warning" role="progressbar" style="width: {{rating3.rating3}}%" aria-valuenow="{{rating3.rating3}}" aria-valuemin="0" aria-valuemax="100" data-toggle="tooltip" data-placement="bottom" title="{{rating3.rating}}% Expired">{{rating3.rating}}%</div>{%endif%}
+</div>
+      {% else %}
+      <div class="progress">
+      {% if arating.rating == 0 %}<div class="progress-bar bg-dark" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" data-toggle="tooltip" data-placement="bottom" title="{{arating.rating}}%">{{arating.rating}}%</div>{%endif%}
+      </div>
+      {% endif %}
+        <br>
+      <strong class="center">Request History</strong>
+    <table id="t012">
+      <tr>
+        <th>Date</th>
+        <th>Time</th>
+        <th>Details</th>
+        <th>Amount</th>
+        <th>Url</th>
+        <th>Transaction ID</th>
+        <th>Status</th>
+        <th><strong>Passed Cash</strong></th>
+      </tr>
+      {% for data in table10 %}
+      <tr>
+        <td> <h6>{{data.rdate}}</h6></td>
+        <td> {{data.rtime}}</td>
+        <td> Request from {{data.customer | title }}</td>
+        <td> N{{data.amount}}</td>
+        <td><a class="dancealot" href="{{data.url}}"> View </a></td>
+        <td>{{data.rcode}}</td>
+        {% if data.has_accepted %}
+        <td style="padding:2px;background-color:green;color:white;"> <input type="checkbox" name="complete" value="completed" checked disabled>Accepted</td>
+        <td>Yes</td>
+        {% elif data.has_declined %}
+        <td style="padding:2px;background-color:red;color:white;"> <input type="checkbox" name="not_completed" value="not_completed"  disabled> Declined </td>
+        <td>No</td>
+        {% else %}
+        <td style="padding:2px;background-color:yellow;color:black;"> <input type="checkbox" name="not_completed" value="not_completed"  disabled>&nbsp; Expired &nbsp;</td>
+        <td>No</td>
+        {% endif %}
+      </tr>
+      <tr>
+        {% endfor %}
+        </table>
+        {% else %}
+
+          <div class="container">
+
+  <div class="accordion">
+    <ul class="list-unstyled">
+      <li class="open">
+        <h3><b>Welcome To Pass Me Cash</b></h3>
+        <div class="question">
+          <h2>Introducing PMC</h2>
+          <span class="glyphicon glyphicon-chevron-down"></span>
+        </div>
+        <div class="answer">
+          <p>Yes! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Exercitationem dolorum dolore totam quo commodi sapiente in, libero, consectetur similique, labore non provident dolorem quibusdam quos, corporis facere est quod deserunt.</p>
+        </div>
+      </li>
+      <li>
+        <div class="question">
+          <h2>Get Started With PMC </h2>
+          <span class="glyphicon glyphicon-chevron-down"></span>
+        </div>
+        <div class="answer">
+          <p>Yes! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Exercitationem dolorum dolore totam quo commodi sapiente in, libero, consectetur similique, labore non provident dolorem quibusdam quos, corporis facere est quod deserunt.</p>
+        </div>
+      </li>
+      <li>
+        <div class="question">
+          <h2>Setting Request Limit</h2>
+          <span class="glyphicon glyphicon-chevron-down"></span>
+        </div>
+        <div class="answer">
+          <p>Hello, {{ user.username | title }} Your have no request yet,...
+                  <br>
+                  <strong>Follow the steps below to get started </strong>
+                  <br>
+                  <ol>
+                    <li>
+                      <p>Click on the Menu Icon </p>
+                      <img src="{% static 'icon.png' %}">
+                    </li>
+                    <br>
+                    <li>
+                      <p>Next Select <b>Account</b></p>
+                      <img src="{% static 'help2.png' %}">
+                    </li>
+                    <br>
+                    <li>
+                      <p>Now Select <b>Set Reqest Limit</b></p>
+                      <img src="{% static 'help3.png' %}">
+                    </li>
+                    <br>
+                    <li>
+                      <p>Now <b>Set Reqest Limit</b></p>
+                      <ul><li type="disc"><p><i>Your request limit will be used to help users around you locate you fast</i></p></li></ul>
+                      <p>when a user makes a request of N10,000 and your limit is below the users <br>request your account will not be shortlisted as list of agents available under <br> the request</p>
+                      <img src="{% static 'help4.png' %}">
+                    </li>
+                    <br>
+                    <li>
+                      <p>Great <b>Your have successfully saved your first request Limit</b></p>
+                      <img src="{% static 'help5.png' %}">
+                    </li>
+                    <br>
+                    <li>
+                      <p>Okay if you got this message you probably inputed a wrong value
+                        <br>Go over the process again</p>
+                      <img src="{% static 'help6.png' %}">
+                    </li>
+                    <br>
+                    <li>
+                      <p>You are all set to go
+                        <br>You will start getting your request soon</p>
+                    </li>
+                  </ol></p>
+        </div>
+      </li>
+      <li>
+        <div class="question">
+          <h2>How to Withdraw funds</h2>
+          <span class="glyphicon glyphicon-chevron-down"></span>
+        </div>
+        <div class="answer">
+          <p>Whatever you want! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Exercitationem dolorum dolore totam quo commodi sapiente in, libero, consectetur similique, labore non provident dolorem quibusdam quos, corporis facere est quod deserunt.</p>
+        </div>
+      </li>
+      <li>
+        <div class="question">
+          <h2>Get More Request</h2>
+          <span class="glyphicon glyphicon-chevron-down"></span>
+        </div>
+        <div class="answer">
+          <p>Yes! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Exercitationem dolorum dolore totam quo commodi sapiente in, libero, consectetur similique, labore non provident dolorem quibusdam quos, corporis facere est quod deserunt.</p>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+</div>
+
+
+        {% endif %}
+
+
+        {% if table10.has_other_pages %}
+        <div class="paginationx p12">
+      <ul>
+        {% if table10.has_previous %}
+        <a href="?page={{ table10.previous_page_number }}"><li>Previous</li></a>
+        {% endif %}
+        {% for i in table10.paginator.page_range %}
+              {% if table10.number == i %}
+              <a class="is-active" href="?page={{ i }}"><li>{{ i }}</li></a>
+              {% else %}
+              <a href="?page={{ i }}"><li>{{ i }}</li></a>
+              {% endif %}
+        {% endfor %}
+        {% if table10.has_next %}
+        <a href="?page={{ table10.next_page_number }}" ><li>Next</li></a>
+        {% endif %}
+      </ul>
+    </div>
+    {% endif %}
+
+
+
+
+
+
+
+    {% if ready == 'yes' %}
+    <script>
+        swal({
+          title: "Congratulations",
+          text: "Your Funds are now ready for withdrawal",
+          icon: "success",
+        });
+        </script>
+      {% else %}
+    {% endif %}
+
+    {% if alertLIST %}
+    {% for item in alertLIST %}
+        <script>
+        swal({
+          title: "{{ item.title }}",
+          text: "{{ item.text }}",
+          icon: "{{ item.icon}}",
+        });
+        </script>
+        {% endfor %}
+        {% endif %}
+    <script src="{% static 'pmcstyle-prime-menu.js' %}"></script>
+    <script>
+
+$(function() {
+        $( '#dl-menu' ).dlmenu({
+          animationClasses : { classin : 'dl-animate-in-4', classout : 'dl-animate-out-4' }
+        });
+      });
+
+//var slider = document.createElement("input");
+//slider.type = "range";
+
+//swal({
+  //content: slider,
+//});
+
+const accordion = document.querySelector('.accordion');
+    const items     = accordion.querySelectorAll('li');
+    const questions = accordion.querySelectorAll('.question');
+
+    function toggleAccordion() {
+      const thisItem = this.parentNode;
+
+      items.forEach(item => {
+        if (thisItem == item) {
+          thisItem.classList.toggle('open');
+          return;
+        }
+
+        item.classList.remove('open');
+      });
+    }
+
+    questions.forEach(question => question.addEventListener('click', toggleAccordion));
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.fixed-action-btn');
+    var instances = M.FloatingActionButton.init(elems, options);
+  });
+
+  // Or with jQuery
+
+  $(document).ready(function(){
+    $('.fixed-action-btn').floatingActionButton();
+  });
+
+$(".dancealot").click(function() {
+swal({
+  title: "Are you sure?",
+  text: "Once deleted, you will not be able to recover this imaginary file!",
+  icon: "warning",
+  buttons: true,
+  dangerMode: true,
+})
+.then((willDelete) => {
+  if (willDelete) {
+    swal("Poof! Your imaginary file has been deleted!", {
+      icon: "success",
+    });
+  } else {
+    swal("Your imaginary file is safe!");
+  }
+});
+});
+
+
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
+
+
+var limit = document.getElementsByID("set_lsimit")[1];
+var att2 = document.createAttribute("minlength");
+var att3 = document.createAttribute("maxlength");
+  att2.value = "4";
+  att3.value = "5";
+  input.setAttributeNode(att2);
+  input.setAttributeNode(att3);
+
+
+  var height = $(window).height();
+var width = $(window).width();
+
+
+if (width < 500) {
+  $(function(){
+$(window).bind("resize",function(){
+    console.log($(this).width())
+    if($(this).width() <500){
+    $('div').remove('#aside')
+    }
+    else{
+    $('div').removeClass('red').addClass('yellow')
+    }
+})
+})
+} else {
+  greeting = "Good evening";
+}
+
+
+console.log(height)
+console.log(width)
+</script>
+</body>
+</html>
+

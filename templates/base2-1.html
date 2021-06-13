@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% load staticfiles %}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>{{ user.username }} - PMC | PassMe Cash Agent Page</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<!-- flickity-docs -->
+<link href="{% static 'vendor/flickity/css/flickity-docs.css' %}" rel="stylesheet">
+<link href="{% static 'vendor/flickity/css/added.css' %}" rel="stylesheet">
+<script src="{% static 'vendor/flickity/js/flickity-docs.min.js' %}"></script>
+  <!-- main-css -->
+<link href="{% static 'receiver/main/css/pmcstyle.css' %}" rel="stylesheet">
+<link href="{% static 'pmcstyle-prime.css' %}" rel="stylesheet">
+<!-- Bootstrap css -->
+<link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+<script src="{% static 'vendor/jquery/jquery-3.3.1.min.js' %}"></script>
+<script src="{% static 'vendor/ajax-jquery/popper.min.js' %}"></script>
+
+<!-- Bootstrap JS -->
+<script src="{% static 'vendor/bootstrap/js/bootstrap.js' %}"></script>
+<script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.js' %}"></script>
+<script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<!-- jQuery -->
+<script src="{% static 'vendor/jquery/jquery.js' %}"></script>
+<script src="{% static 'vendor/jquery/jquery.slim.js' %}"></script>
+<script src="{% static 'vendor/jquery/jquery-3.4.1.min.js' %}"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script> -->
+<!-- Animate.css -->
+<!-- https://materializecss.com/text-inputs.html -->
+<link rel="stylesheet" href="{% static 'vendor/animatecss/animate.min.css' %}" >
+<!-- materialize css
+  <link href="{% static 'vendor/materialize/css/materialize.css' %}" rel="stylesheet">
+  <link href="{% static 'vendor/materialize/css/materialize.min.css' %}" rel="stylesheet">-->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons"  rel="stylesheet">
+<!-- materialize Js -->
+<script src="{% static 'vendor/materialize/js/materialize.js' %}"></script>
+<script src="{% static 'vendor/materialize/js/selematerializect2.min.js' %}"></script>
+<!-- select2 css -->
+<link href="{% static 'vendor/select2/css/select2.css' %}" rel="stylesheet">
+<link href="{% static 'vendor/select2/css/select2.min.css' %}" rel="stylesheet">
+<!-- select2 js -->
+<script src="{% static 'vendor/select2/js/select2.js' %}"></script>
+<script src="{% static 'vendor/select2/js/select2.min.js' %}"></script>
+<script src="{% static 'vendor/select2/js/select2.full.js' %}"></script>
+<script src="{% static 'vendor/select2/js/select2.full.min.js' %}"></script>
+
+<!-- sweetalert-docs -->
+<script src="{% static 'vendor/sweetalert/sweetalert.min.js' %}"></script>
+<!-- main-js -->
+<script src="{% static 'receiver/main/jsxlocation.js' %}"></script>
+
+
+<script src="{% static 'pmcstyle-prime.js' %}"></script>
+<!-- others-js -->
+<!-- geoip -->
+<script src="//js.maxmind.com/js/apis/geoip2/v2.1/geoip2.js"></script>
+<link href="{% static 'agents/css/normalizr.css' %}" rel="stylesheet">
+</head>
+{% block foo %}
+   {% include "nav2-1.html" %}
+{% endblock %}

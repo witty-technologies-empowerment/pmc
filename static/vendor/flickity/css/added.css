@@ -1,0 +1,279 @@
+
+
+/*//////////////////////////////////////////////////////////////////
+[ FONT ]*/
+
+@font-face {
+  font-family: Raleway-Regular;
+  src: url('../fonts/Raleway/Raleway-Regular.ttf'); 
+}
+
+@font-face {
+  font-family: Ubuntu-Regular;
+  src: url('../fonts/Ubuntu/Ubuntu-Regular.ttf'); 
+}
+
+@font-face {
+  font-family: Ubuntu-Medium;
+  src: url('../fonts/Ubuntu/Ubuntu-Medium.ttf'); 
+}
+
+@font-face {
+  font-family: Ubuntu-MediumItalic;
+  src: url('../fonts/Ubuntu/Ubuntu-MediumItalic.ttf'); 
+}
+
+@font-face {
+  font-family: Ubuntu-Bold;
+  src: url('../fonts/Ubuntu/Ubuntu-Bold.ttf'); 
+}
+
+@font-face {
+  font-family: Ubuntu-BoldItalic;
+  src: url('../fonts/Ubuntu/Ubuntu-BoldItalic.ttf'); 
+}
+
+@font-face {
+  font-family: Ubuntu-LightItalic;
+  src: url('../fonts/Ubuntu/Ubuntu-LightItalic.ttf'); 
+}
+
+@font-face {
+  font-family: Ubuntu-Italic;
+  src: url('../fonts/Ubuntu/Ubuntu-Italic.ttf'); 
+}
+
+@font-face {
+  font-family: Ubuntu-Light;
+  src: url('../fonts/Ubuntu/Ubuntu-Light.ttf'); 
+}
+
+
+
+* { box-sizing: border-box; }
+
+body { font-family: 'Raleway-Regular', sans-serif !important; }
+
+.pmc-logo-head {
+	font-family: 'Ubuntu-Medium', sans-serif !important;
+}
+
+.pmc-text-add {
+	font-family: 'Ubuntu-Light', sans-serif !important;
+}
+.carouselz {
+  background: #FAFAFA;
+  margin: 0 60px; /* space for prev/next buttons */
+}
+
+.carousel-cella {
+  width: 100%;
+  height: 200px;
+  margin-right: 10px;
+  background: #8C8;
+  border-radius: 5px;
+  text-align: center;
+  padding: 10px;
+}
+
+/* cell number */
+.carousel-cella:before {
+  display: block;
+  text-align: center;
+  line-height: 200px;
+  font-size: 80px;
+  color: white;
+}
+
+
+/* smaller, dark, rounded square */
+.flickity-prev-next-button {
+  width: 30px;
+  height: 30px;
+  border-radius: 5px;
+  background: #333;
+}
+.flickity-prev-next-button:hover {
+  background: #F90;
+}
+/* arrow color */
+.flickity-prev-next-button .arrow {
+  fill: white;
+}
+.flickity-prev-next-button.no-svg {
+  color: white;
+}
+/* position outside */
+.flickity-prev-next-button.previous {
+  left: -40px;
+}
+.flickity-prev-next-button.next {
+  right: -40px;
+}
+
+
+	table {
+		width: 100%
+	}
+	table, th, td {
+		border: 1px solid black;
+		border-collapse: collapse;
+	}
+	th {
+		padding: 3px;
+		text-align: center;
+		color:black;
+	}
+	td {
+		padding: 3px;
+		text-align: center;
+	}
+	table#t012 tr:nth-child(even) {
+		background-color: #eee;
+		color: black;
+	}
+	table#t012 tr:nth-child(odd) {
+		background-color: #fff;
+		color: black;
+	}
+	table#t012 {
+		background-color: black;
+		color: #fff;
+	}
+	#section {
+		width: 46em;
+		float: right;
+		padding: 10px;
+		margin-right: 10px;
+	}
+	#saside {
+		width: 18em;
+		float: left;
+		padding: 10px;
+		margin-left: 20px;
+		position: static;
+	}
+	.sidebar {
+		padding: 5px;
+		background-color: #eee;
+		border-radius: 5px;
+		margin-bottom: 20px;
+	}
+	.center {
+		position: relative;
+		text-align: center;
+		padding: 5px;
+	}
+	.note {
+		float: center;
+		width: 37em;
+		padding: 5px;
+		background-color: #1ceace;
+	}
+	.PMCtooltip {
+		text-decoration: none;
+		position: relative;
+		display: inline-block;
+	}
+	.PMCtooltiponly:hover {
+		color: #1ceace;
+		text-decoration: none;
+		font-size: 18px;
+	}
+	.PMCtooltip .PMCtooltiptext {
+		visibility: hidden;
+		width: 200px;
+		background-color: black;
+		color: #fff;
+		text-align: center;
+		border-radius: 6px;
+		padding: 5px;
+		position: absolute;
+		z-index: 1;
+		top: -5px;
+		left: 110%;
+	}
+
+	.PMCtooltip .PMCtooltiptext::after {
+		content: "";
+		position: absolute;
+		top: 50%;
+		right: 100%;
+		/* To the Left of the tooltip */
+		margin-top: -5px;
+		border-width: 5px;
+		border-style: solid;
+		border-color: transparent black transparent transparent;
+	}
+	.PMCtooltip:hover .PMCtooltiptext {
+		visibility: visible;
+		text-decoration: none;;
+	}
+	.pmc_ad {
+		color: blue;
+	}
+  .pmc_ad_link {
+    cursor: help;
+  }
+
+ .move {
+ margin-right: 35px !important;
+ }
+
+
+
+
+
+/* GENERAL STYLES */
+
+.paginationx{
+  padding: 30px 0;
+}
+
+.paginationx ul{
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.paginationx a{
+  display: inline-block;
+  padding: 10px 18px;
+  color: #222;
+  text-decoration: none;
+}
+
+.paginationx a:hover{
+  text-decoration: none;
+}
+a.disabledx {
+  pointer-events: none;
+  cursor: default;
+}
+
+.p12 a:first-of-type, .p12 a:last-of-type, .p12 .is-active{
+  background-color: #2ecc71;
+  color: #fff;
+  font-weight: bold;
+}
+
+.pmcbtn {
+  border: 2px solid black;
+  background-color: white;
+  color: black;
+  padding: 1px 9px;
+  font-size: 18px;
+  cursor: pointer;
+  border-radius: 2px;
+}
+
+/* Green */
+.successbtn {
+  border-color: #4CAF50;
+  color: green;
+}
+
+.successbtn:hover {
+  background-color: #4CAF50;
+  color: white;
+}

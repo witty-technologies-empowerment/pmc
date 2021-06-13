@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load staticfiles %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>PMC | Login </title>
+
+    <!-- Font Icon -->
+    <link rel="stylesheet" href="{% static 'accounts/form/fonts/material-icon/css/material-design-iconic-font.min.css' %}">
+
+    <!-- Main css -->
+    <link rel="stylesheet" href="{% static 'accounts/main/css/form.css' %}">
+
+    <!-- Form css -->
+    <link rel="stylesheet" href="{% static 'accounts/form/css/style.css' %}">
+    <link href="{% static 'landing/assest/css/pmcstyle.css' %}" rel="stylesheet">
+
+        <!-- Sweet Alert -->
+    <script src="{% static 'vendor/sweetalert/sweetalert.min.js' %}"></script>
+
+    <link href="{% static 'vendor/flickity/css/added.css' %}" rel="stylesheet">
+    <style type="text/css">
+        #btn_width {
+            width: 50%;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <center>
+<a href="{% url 'index' %}"><img class="pmc-logo sign_up m-t-2 m-b-2" src="{% static 'landing/PMC-Logo.png' %}" alt="centered image" height="120" width="280"></a>
+</center>
+</div>
+<!-- Sing in  Form -->
+<section class="sign-in">
+    <div class="container">
+        <div class="signin-content">
+
+
+            <div class="signin-form">
+                <h2 class="form-title" style="text-align: center;margin: 0px;">Sign in</h2>
+                <h1 style="text-align: center;color: purple;margin-bottom: 15px;"><small><i>User or Agent Account</i></small></h1>
+                <form method="POST" action="." enctype="multipart/form-data">
+                  <!-- ** Form Security Start Here **-->
+                  {% csrf_token %}
+                  <!-- ** Form Security End Here **-->
+                    <!-- {% if response %}
+                    <p style="text-align:center; color:red; font-size:20px;">{{ response }}</p>
+                    {% endif %} -->
+                    <input type="radio" id="male" name="gender" value="male">Male <br>
+                    <!-- <label for="male"></label><br> -->
+                    <input type="radio" id="female" name="gender" value="female">
+                    <label for="female">Female</label><br>
+                    <input type="radio" id="other" name="gender" value="other">
+                    <label for="other">Other</label>
+                    <div class="form-group">
+                        {% if username %}
+                        <label for="username"><i class="zmdi zmdi-sign-in material-icons-name"></i></label>
+                        <input type="text" name="username" id="username" placeholder="{{Username}}"/>
+                        {% else %}
+                        <input type="radio" name="username" id="username" placeholder="Username"/>
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        <label for="password"><i class="zmdi zmdi-lock"></i></label>
+                        <input type="password" name="password" id="password" placeholder="Password"/>
+                    </div>
+                    <div class="form-group">
+                        <input type="checkbox" name="remember-me" id="remember-me" class="agree-term" />
+                        <label for="remember-me" class="label-agree-term"><span><span></span></span>Remember me</label>
+                    </div>
+                    <div class="form-group form-button">
+                        <input type="submit" name="signin" id="signin" class="form-submit" value="Log in"/>
+                    </div>
+                </form>
+
+                <!-- <div class="social-login">
+                    <span class="social-label">Or login with</span>
+                    <ul class="socials">
+                        <li><a href="#"><i class="display-flex-center zmdi zmdi-facebook"></i></a></li>
+                        <li><a href="#"><i class="display-flex-center zmdi zmdi-twitter"></i></a></li>
+                        <li><a href="#"><i class="display-flex-center zmdi zmdi-google"></i></a></li>
+                    </ul>
+                </div> -->
+            </div>
+            <div class="signin-image">
+                <figure style="margin-bottom: 10px;"><img class="imgx" src="{% static 'accounts/form/images/signin-image.png' %}" alt="sing up image"></figure>
+                <center><a style="background-color: purple;padding: 5px;border-radius: 3px;color: #FFF;" href="{% url 'accounts:register' %}" class="signup-image-link">Create an account</a></center>
+            </div>
+        </div>
+    </div>
+</section>
+<script src="{% static 'landing/assest/js/jquery-2.2.4.min.js' %}"></script>
+<script>
+        $(window).ready(function () {
+            if (screen.width <= 768) {
+                $(".imgx").hide();
+                $(".imgx").Attr('id','btn_width');
+            }
+            else {
+
+                $(".imgx").show();
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+/*Don't forget to add Font Awesome CSS : "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"*/
+input[type="text"] {
+  border: 2px solid rgba(170,170,170,0.5);
+  margin: 8px 0;
+  outline: none;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  box-sizing: border-box;
+  transition: 0.3s;
+}
+
+input[type="text"]:focus {
+  border-color: dodgerBlue;
+  box-shadow: 0 0 8px 0 dodgerBlue;
+}
+
+.inputWithIcon {
+  position: relative;
+}
+
+.inputWithIcon i {
+  
+  padding: 1px;
+  padding-left: 3px
+  padding-bottom: 5px;
+  transition: 0.3s;
+}
+
+.inputWithIcon input[type="text"]:focus + i {
+  color: dodgerBlue;
+}
+
+.error{
+  display: none;
+  margin-left: 10px;
+}   
+    
+.error_show{
+  color: red;
+  margin-left: 10px;
+}
+
+#amount {
+  font-size: 18px;
+  letter-spacing: 0.089em;
+  font-weight: 300;
+  text-align: center;
+}

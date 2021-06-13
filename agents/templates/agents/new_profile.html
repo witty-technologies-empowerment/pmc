@@ -1,0 +1,81 @@
+{% include "base2-1.html" %}
+{% load staticfiles %}
+<script>(function(e,t,n){var r=e.querySelectorAll("html")[0];r.className=r.className.replace(/(^|\s)no-js(\s|$)/,"$1js$2")})(document,window,0);
+var fillInPage = (function () {
+    var updateCityText = function (geoipResponse) {
+
+        var link = "/shelter?lat=" + geoipResponse.location.latitude;
+        link += "&lon=" +geoipResponse.location.longitude;
+
+        /* It's possible that we won't have any names for this city */
+        var cityName = geoipResponse.city.names.en || 'your city';
+
+        /*
+           most_specific_subdivision returns the smallest available
+           subdivision (region) as defined in ISO 3166-2.
+        */
+        var regionName = geoipResponse.most_specific_subdivision.names.en;
+        var code = geoipResponse.country.iso_code;
+        console.log(geoipResponse);
+        var cityHTML =
+            '<span>'
+            + cityName;
+
+        if (cityName && code ) {
+            cityHTML += ', ' + code;
+        }
+        cityHTML += '</span>.';
+
+        $("#city").html(cityHTML);
+    };
+
+    var onSuccess = function (geoipResponse) {
+        updateCityText(geoipResponse);
+    };
+
+    /* If we get an error we will */
+    var onError = function (error) {
+        return;
+    };
+
+    return function () {
+        geoip2.city( onSuccess, onError );
+    };
+}());
+
+fillInPage();
+</script>
+<body>
+    <!-- minifycode.com to compress codes HTML, JS, CSS -->
+  <!-- search by Angolia-->
+  {% if messages %}
+  {% for message in messages %}
+  <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+      <strong>{{ user.username | title }}</strong> {{ message }} <a href="#" onclick="locationGet()">reload</a>
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    {% endfor%}
+    {% endif %}
+  <div class="pmc-class jumbotron">
+
+    <div class="container">
+      <h3 class="display-6">Add your Location</h3>
+      <p>This will Help Users locate you better</p>
+      <hr class="my-4">
+      <form action="." method="POST">
+        {% csrf_token %}
+        {% if help_message %}
+        <p style="text-align:center; color:blue; font-size:14px;"><i><sup>**</sup>{{ help_message }}</i></p>
+        {% endif%}<br>
+        <input style="width: 100%;width: 16.7em;height: 40px;border-radius: 5px;border: 1px solid #e6e6e6;text-align: center;background-color: #fff" type="text" name="street" placeholder="Street" required><br><br><input style="width: 100%;width: 16.7em;height: 40px;border-radius: 5px;border: 1px solid #e6e6e6;text-align: center;background-color: #fff" type="text" name="city" placeholder="City" required><br><br>
+        <select style="width: 25%;position: absolute;left: 41%;
+  margin-left: -50px;" class="js-example-placeholder-single js-states form-control" name="state" id="select"><option value="" selected>- Select your state -</option><option value="Abuja FCT">Abuja FCT</option><option value="Abia">Abia</option><option value="Adamawa">Adamawa</option><option value="Akwa Ibom">Akwa Ibom</option><option value="Anambra">Anambra</option><option value="Bauchi">Bauchi</option><option value="Bayelsa">Bayelsa</option><option value="Benue">Benue</option><option value="Borno">Borno</option><option value="Cross River">Cross River</option><option value="Delta">Delta</option><option value="Ebonyi">Ebonyi</option><option value="Edo">Edo</option><option value="Ekiti">Ekiti</option><option value="Enugu">Enugu</option><option value="Gombe">Gombe</option><option value="Imo">Imo</option><option value="Jigawa">Jigawa</option><option value="Kaduna">Kaduna</option><option value="Kano">Kano</option><option value="Katsina">Katsina</option><option value="Kebbi">Kebbi</option><option value="Kogi">Kogi</option><option value="Kwara">Kwara</option><option value="Lagos">Lagos</option><option value="Nassarawa">Nassarawa</option><option value="Niger">Niger</option><option value="Ogun">Ogun</option><option value="Ondo">Ondo</option><option value="Osun">Osun</option><option value="Oyo">Oyo</option><option value="Plateau">Plateau</option><option value="Rivers">Rivers</option><option value="Sokoto">Sokoto</option><option value="Taraba">Taraba</option><option value="Yobe">Yobe</option><option value="Zamfara">Zamfara</option><option value="Outside Nigeria">Outside Nigeria</option> </select><br><br>
+          <button class="btn btn-lg btn-outline-primary"> &nbsp &nbsp &nbsp Save &nbsp &nbsp &nbsp</button>
+      </form>
+      </div>
+  </div>
+</body>
+</html>
+

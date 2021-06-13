@@ -1,0 +1,45 @@
+{% include 'base.html' %}
+<body>
+	<section class="profile">
+		<h3 class="profile_header">Profile</h3>
+		<div class="profile_default">
+			<div class="profile_img">
+				<div id="img"></div>				
+			</div>
+			<div class="profile_details" >
+				<div id="p_text">
+					<strong>{{username}}</strong>
+					<br>
+					Member since 10/10/19
+					<br>
+					other details here
+				</div>
+			</div>
+			{% if profileView %}
+		      {% if authenticated %}
+			<div class="profile_button">
+				<div class="p_button">
+					<button>Edit Profile</button>
+				</div>				
+			</div>
+			{% endif %}
+			{% endif %}
+		</div>
+		{% if profileView %}
+		      {% if authenticated %}
+		<div class="profile_side">
+			<strong><p>Sign-in method</p></strong>
+		</div>
+		<div class="texts lines">
+			<strong><p>EMAIL ADDRESS</p></strong>
+			<p>$ email $</p>
+			<div class="pro_box">
+				<p id="xleft">Secure your account by enabling two-factor authentication.</p>
+				<button style="float: right;margin: 0 20px 0 0">Enable 2FA</button>
+			</div>
+		</div>
+		{% endif %}
+			{% endif %}
+	</section>
+</body>
+</head>

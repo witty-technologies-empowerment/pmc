@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta name="theme-color" content="#884bdf" >
+	<meta charset="UTF-8">
+	<meta name="description" content="">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>Welcome to PassMeCash</title>
+	<link rel="icon" href="{% static 'landing/favicon_inverse/favicon.ico' %}">
+	<link href="{% static 'landing/assest/css/style.css' %}" rel="stylesheet">
+    <link href="{% static 'landing/assest/css/pmcstyle.css' %}" rel="stylesheet">
+	<link href="{% static 'landing/assest/css/responsive.css' %}" rel="stylesheet">
+</head>
+
+<body>
+	<div id="preloader">
+		<div class="colorlib-load"></div>
+	</div>
+	<header class="header_area animated">
+		<div class="container-fluid">
+			<div class="row align-items-center">
+				<div class="col-12 col-lg-10">
+					<div class="menu_area">
+						<nav class="navbar navbar-expand-lg navbar-light"> <a class="navbar-brand" href="#"><img class="pmc-logo" src="{% static 'landing/PMC-Logo.png' %}" ></a>
+							<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ca-navbar" aria-controls="ca-navbar" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span>
+							</button>
+							<div class="collapse navbar-collapse" id="ca-navbar">
+								<ul class="navbar-nav ml-auto" id="nav">
+									<li class="nav-item active"><a class="nav-link" href="#home">Home</a>
+									</li>
+									<li class="nav-item"><a class="nav-link" href="#about">About</a>
+									</li>
+									<li class="nav-item"><a class="nav-link" href="#features">Features</a>
+									</li>
+									<li class="nav-item"><a class="nav-link" href="#testimonials">Testimonials</a>
+									</li>
+									<li class="nav-item"><a class="nav-link" href="#contact">Contact</a>
+									</li>
+									<li class="nav-item"><a class="nav-link" href="{% url 'accounts:user_login' %}">Login</a>
+									</li>
+								</ul>
+								<div class="sing-up-button d-lg-none"> <a href="{% url 'accounts:register' %}">Sign Up Free</a>
+								</div>
+							</div>
+						</nav>
+					</div>
+				</div>
+				<div class="col-12 col-lg-2">
+					<div class="sing-up-button d-none d-lg-block"> <a href="{% url 'accounts:register' %}">Sign Up Free</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+	<section class="wellcome_area clearfix" id="home">
+		<div class="container h-100">
+			<div class="row h-100 align-items-center">
+				<div class="col-12 col-md">
+					<div class="wellcome-heading">
+						<h2>PassMeCash</h2>
+						<h3>PMC</h3><p></p>
+						<p style="font-size:22px;"  >Are you stuck at a place with no banking activities!<br>
+							We make financial services stress free...
+							<br>By our friendly agents who bring money to your location...</p>
+					</div>
+					<div class="get-start-area">
+						<form action="{% url 'accounts:register' %}" method="POST" class="form-inline">
+                            {% csrf_token %}
+							<input type="email" class="form-control email" name="email" placeholder="name@example.com">
+							<input type="submit" name="func" class="submit" value="Get Started">
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="welcome-thumb wow fadeInDown" data-wow-delay="0.5s">
+			<img class="imgx" src="{% static 'landing/main/img/bg-img/welcome-img.png' %}" alt="">
+		</div>
+	</section>
+	<section class="special-area bg-white section_padding_100" id="about">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<div class="section-heading text-center">
+						<h2>How It Works</h2>
+						<div class="line-shape"></div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-12 col-md-4">
+					<div class="single-special text-center wow fadeInUp" data-wow-delay="0.2s">
+						<div class="single-icon"> <i class="ti-user" aria-hidden="true"></i>
+						</div>
+						<h4>Create an account</h4>
+					</div>
+				</div>
+				<div class="col-12 col-md-4">
+					<div class="single-special text-center wow fadeInUp" data-wow-delay="0.4s">
+						<div class="single-icon"><i style="font-style: normal;" aria-hidden="true">NGN</i>
+						</div>
+						<h4>Enter requested amount</h4>
+					</div>
+				</div>
+				<div class="col-12 col-md-4">
+					<div class="single-special text-center wow fadeInUp" data-wow-delay="0.6s">
+						<div class="single-icon"> <i class="ti-id-badge" aria-hidden="true"></i>
+						</div>
+						<h4>Select an agent</h4>
+						
+					</div>
+				</div>
+			</div>
+			<div class="row">
+			<div class="col-12 col-md-4">
+				<div class="single-special text-center wow fadeInUp" data-wow-delay="0.2s">
+					<div class="single-icon"> <i class="ti-credit-card" aria-hidden="true"></i>
+					</div>
+					<h4>Make payment</h4>
+				</div>
+			</div>
+			<div class="col-12 col-md-4">
+				<div class="single-special text-center wow fadeInUp" data-wow-delay="0.4s">
+					<div class="single-icon"> <i class="ti-link" aria-hidden="true"></i>
+					</div>
+					<h4>Connect to agent</h4>
+				</div>
+			</div>
+				<div class="col-12 col-md-4">
+					<div class="single-special text-center wow fadeInUp" data-wow-delay="0.4s">
+						<div class="single-icon"> <i class="ti-wallet" aria-hidden="true"></i>
+						</div>
+						<h4>Recieve your cash</h4>
+					</div>
+				</div>
+			</div>
+			</div>
+		</div>
+		<div class="special_description_area mt-150">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-6">
+						<div class="special_description_img">
+							<img src="{% static 'landing/main/img/bg-img/special.png' %}" alt="">
+						</div>
+					</div>
+					<div class="col-lg-6 col-xl-5 ml-xl-auto">
+						<div class="special_description_contentwow fadeInUp" data-wow-delay="0.2s">
+							<h2>Our Propositions!</h2>
+							<p>"Presently people queue at the Banks and ATMs over long period of time to withdraw their own money, and most times it comes with a lot of stress because there may not be available cash to withdraw. Thus we are providing a platform for mobile cash request delivery. Here at PassMeCash you can request for money and the amount requested will be brought to you without stress and in minutes.
+
+							"PassMeCash" is a financial service that provides easy accessible funds where ever and whenever it is requested, through fast mobile delivery by connecting our closest agents to the users/clients".</p>
+							<!-- <div class="app-download-area">
+								<div class="app-download-btn wow fadeInUp" data-wow-delay="0.2s">
+									<a href="#"> <i class="fa fa-android"></i>
+										<p class="mb-0"><span>coming soon on</span> Google Store</p>
+									</a>
+								</div>
+								<div class="app-download-btn wow fadeInDown" data-wow-delay="0.4s">
+									<a href="#"> <i class="fa fa-apple"></i>
+										<p class="mb-0"><span>coming soon on</span> Apple Store</p>
+									</a>
+								</div>
+							</div> -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section class="awesome-feature-area bg-white section_padding_0_50 clearfix" id="features">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<div class="section-heading text-center">
+						<h2>Awesome Features</h2>
+						<div class="line-shape"></div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-12 col-sm-6 col-lg-4">
+					<div class="single-feature"> <i class="ti-face-smile" aria-hidden="true"></i>
+						<h5>Awesome Experience</h5>
+						<p>Our platform is responsive and user friendly.</p>
+					</div>
+				</div>
+				<div class="col-12 col-sm-6 col-lg-4">
+					<div class="single-feature"> <i class="ti-pencil-alt" aria-hidden="true"></i>
+						<h5>Easy Cash Request</h5>
+						<p>You can request for cash from wherever you are.</p>
+					</div>
+				</div>
+				<div class="col-12 col-sm-6 col-lg-4">
+					<div class="single-feature"> <i class="fa fa-flash" aria-hidden="true"></i>
+						<h5>Swift Delivery</h5>
+						<p>You get your requested cash within 5 minutes.</p>
+					</div>
+				</div>
+				<div class="col-12 col-sm-6 col-lg-4">
+					<div class="single-feature"> <i class="ti-thumb-up" aria-hidden="true"></i>
+						<h5>Affordable Charges</h5>
+						<p>Our charges are relatively affordable and favourable to our clients.</p>
+					</div>
+				</div>
+				<div class="col-12 col-sm-6 col-lg-4">
+					<div class="single-feature"> <i class="ti-headphone" aria-hidden="true"></i>
+						<h5>24/7 Online Support</h5>
+						<p>Got any challenge! We have a team to back you up.</p>
+					</div>
+				</div>
+				<div class="col-12 col-sm-6 col-lg-4">
+					<div class="single-feature"> <i class="ti-lock" aria-hidden="true"></i>
+						<h5>Security</h5>
+						<p>Our platform is secured and encrypted.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<div class="video-section">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<div class="video-area" style="background-color:white;background-image: url({% static 'landing/main/img/bg-img/video.png' %});">
+						<div class="video-play-btn"> <a href="https://www.youtube.com/watch?v=f5BBJ4ySgpo" class="video_btn"><i class="fa fa-play" aria-hidden="true"></i></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<section class="cool_facts_area clearfix">
+		<div class="container">
+			<div class="row">
+				<div class="col-12 col-md-3 col-lg-3">
+					<div class="single-cool-fact d-flex justify-content-center wow fadeInUp" data-wow-delay="0.2s">
+						<div class="counter-area">
+							<h3><span class="counter">20</span></h3>
+						</div>
+						<div class="cool-facts-content"> <i class="ion-man"></i>
+							<p>Active
+								<br>Agent</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-12 col-md-3 col-lg-3">
+					<div class="single-cool-fact d-flex justify-content-center wow fadeInUp" data-wow-delay="0.4s">
+						<div class="counter-area">
+							<h3><span class="counter">100</span></h3>
+						</div>
+						<div class="cool-facts-content"> <i class="ion-happy-outline"></i>
+							<p>Happy
+								<br>Clients</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-12 col-md-3 col-lg-3">
+					<div class="single-cool-fact d-flex justify-content-center wow fadeInUp" data-wow-delay="0.6s">
+						<div class="counter-area">
+							<h3><span class="counter">120</span></h3>
+						</div>
+						<div class="cool-facts-content"> <i class="ion-person"></i>
+							<p>ACTIVE
+								<br>ACCOUNTS</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-12 col-md-3 col-lg-3">
+					<div class="single-cool-fact d-flex justify-content-center wow fadeInUp" data-wow-delay="0.8s">
+						<div class="counter-area">
+							<h3><span class="counter">10</span></h3>
+						</div>
+						<div class="cool-facts-content"> <i class="ion-ios-star-outline"></i>
+							<p>TOTAL
+								<br>SITE RATES</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- <section class="app-screenshots-area bg-white section_padding_0_100 clearfix" id="screenshot">
+		<div class="container">
+			<div class="row">
+				<div class="col-12 text-center">
+					<div class="section-heading">
+						<h2>Screenshots</h2>
+						<div class="line-shape"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-12">
+					<div class="app_screenshots_slides owl-carousel">
+						<div class="single-shot">
+							<img src="{% static 'landing/main/img/scr-img/app-1.jpg' %}" alt="">
+						</div>
+						<div class="single-shot">
+							<img src="{% static 'landing/main/img/scr-img/app-2.jpg' %}" alt="">
+						</div>
+						<div class="single-shot">
+							<img src="{% static 'landing/main/img/scr-img/app-3.jpg' %}" alt="">
+						</div>
+						<div class="single-shot">
+							<img src="{% static 'landing/main/img/scr-img/app-4.jpg' %}" alt="">
+						</div>
+						<div class="single-shot">
+							<img src="{% static 'landing/main/img/scr-img/app-5.jpg' %}" alt="">
+						</div>
+						<div class="single-shot">
+							<img src="{% static 'landing/main/img/scr-img/app-3.jpg' %}" alt="">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section> -->
+	<section class="clients-feedback-area bg-white section_padding_100 clearfix" id="testimonials">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-12 col-md-10">
+					<div class="slider slider-for">
+						<div class="client-feedback-text text-center">
+							<div class="client"> <i class="fa fa-quote-left" aria-hidden="true"></i>
+							</div>
+							<div class="client-description text-center">
+								<p>“ An unusal bau beautifully amazing idea, I mean no more queueing , Who would not love that?... And there transfer time so swift ... ”</p>
+							</div>
+							<div class="star-icon text-center"> <i class="ion-ios-star"></i>  <i class="ion-ios-star"></i>  <i class="ion-ios-star"></i>  <i class="ion-ios-star"></i>  <i class="ion-ios-star"></i>
+							</div>
+							<div class="client-name text-center">
+								<h5>Moses Major</h5>
+								<p>Warri, Delta.</p>
+							</div>
+						</div>
+						<div class="client-feedback-text text-center">
+							<div class="client"> <i class="fa fa-quote-left" aria-hidden="true"></i>
+							</div>
+							<div class="client-description text-center">
+								<p>“ This New Fintech startup is very convinent and also very friendly, Its a very good way of getting money to we the community because of the fact that its getting it to us at the confort of our homes. ”</p>
+							</div>
+							<div class="star-icon text-center"> <i class="ion-ios-star"></i>  <i class="ion-ios-star"></i>  <i class="ion-ios-star"></i>  <i class="ion-ios-star"></i>  <i class="ion-ios-star"></i>
+							</div>
+							<div class="client-name text-center">
+								<h5>Ekwere Samuel</h5>
+								<p>Effurun, Delta.</p>
+							</div>
+						</div>
+						<div class="client-feedback-text text-center">
+							<div class="client"> <i class="fa fa-quote-left" aria-hidden="true"></i>
+							</div>
+							<div class="client-description text-center">
+								<p>“ An Excellent idea... ”</p>
+							</div>
+							<div class="star-icon text-center"> <i class="ion-ios-star"></i>  <i class="ion-ios-star"></i>  <i class="ion-ios-star"></i>  <i class="ion-ios-star"></i>  </i>
+							</div>
+							<div class="client-name text-center">
+								<h5>Juliana</h5>
+								<p>Warri, Delta.</p>
+							</div>
+						</div>
+						<div class="client-feedback-text text-center">
+							<div class="client"> <i class="fa fa-quote-left" aria-hidden="true"></i>
+							</div>
+							<div class="client-description text-center">
+								<p>“ Very Easy to use, Secure and at a low charge rate, I'm WOWED... ”</p>
+							</div>
+							<div class="star-icon text-center"> <i class="ion-ios-star"></i>  <i class="ion-ios-star"></i>  <i class="ion-ios-star"></i>  <i class="ion-ios-star"></i>  </i>
+							</div>
+							<div class="client-name text-center">
+								<h5>Durubah Chukwuebuka</h5>
+								<p>Effurun, Delta.</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-12 col-md-6 col-lg-5">
+					<div class="slider slider-nav">
+						<div class="client-thumbnail">
+							<img src="{% static 'landing/main/img/bg-img/client-3.jpg' %}" alt="">
+						</div>
+						<div class="client-thumbnail">
+							<img src="{% static 'landing/main/img/bg-img/client-2.jpg' %}" alt="">
+						</div>
+						<div class="client-thumbnail">
+							<img src="{% static 'landing/main/img/bg-img/client-1.jpg' %}" alt="">
+						</div>
+						<div class="client-thumbnail">
+							<img src="{% static 'landing/main/img/bg-img/client-2.jpg' %}" alt="">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	
+	</section>
+	<section class="footer-contact-area section_padding_100 clearfix" id="contact">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6">
+					<div class="section-heading">
+						<h2>Get in touch with us!</h2>
+						<div class="line-shape"></div>
+					</div>
+					<div class="footer-text">
+						<p>Want to know us better...? Send us a hello mail or visit us today.</p>
+					</div>
+					<div class="address-text">
+						<p><span>Address:</span> #28 Jakpa Road, <br>Effurun P.O.Box 30 Effurun,<br>Delta State, Nigeria, Effurun-Warri 330003.</p>
+					</div>
+					<div class="phone-text">
+						<p><span>Phone:</span> +234 (0) 80 PassMeCash <a href="tel:08106529115"> Call Us Now</a></p>
+					</div>
+					<div class="email-text">
+						<p><span>Email:</span> hello@passmecash.com <a href="mailto:hello@passmecash.com">Send Email</a></p>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="contact_from">
+						<form action="#" method="POST">
+							{% csrf_token %}
+							<div class="contact_input_area">
+								<div class="row">
+									<div class="col-md-12">
+										
+										{% if error == 'True' %}
+										<div class="email-text">
+										<p><span>{{message}} </span><i style="color: green;" class="ion-checkmark-round"></i></p></div>
+										{% elif error == 'False' %}
+										<p><span>{{message}} </span><i style="color: red;" class="ion-close-round"></i></p>
+										{% else %}
+										
+										{% endif %}
+											
+										<div class="form-group">
+											<input type="text" class="form-control" name="name" id="name" placeholder="Your Name" required>
+										</div>
+									</div>
+									<div class="col-md-12">
+										<div class="form-group">
+											<input type="email" class="form-control" name="email" id="email" placeholder="Your E-mail" required>
+										</div>
+									</div>
+									<div class="col-12">
+										<div class="form-group">
+											<textarea name="message" class="form-control" id="message" cols="30" rows="4" placeholder="Your Message *" required></textarea>
+										</div>
+									</div>
+									<div class="col-12">
+										<button type="submit" class="btn submit-btn">Send Now</button>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<footer class="footer-social-icon text-center section_padding_70 clearfix">
+		<div class="footer-text">
+			<a href="{% url 'index' %}"><img class="pmc-logo" src="{% static 'landing/PMC-Logo-inverse.png' %}" ></a>
+		</div>
+		<div class="footer-social-icon"> <a href="facebook.com/passmecash"><i class="fa fa-facebook" aria-hidden="true"></i></a>  <a href="twitter.com/passmecash"><i class="active fa fa-twitter" aria-hidden="true"></i></a> 
+			<a href="instagram.com/passmecash"> <i class="fa fa-instagram" aria-hidden="true"></i>
+			</a> <a href="google.com/passmecash"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
+		</div>
+		<div class="footer-menu">
+			<nav>
+				<ul>
+					<li><a href="#about">About</a>
+					</li>
+					<li><a href="#">Terms &amp; Conditions</a>
+					</li>
+					<li><a href="#">Privacy Policy</a>
+					</li>
+					<li><a href="#contact">Contact</a>
+					</li>
+					<li><a href="{% url 'agents:register' %}">Agent Registration</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+		<div class="copyright-text">
+			<p>Copyright © <script >document.write(new Date().getFullYear())</script> PassMeCash.</p><i style="color: red;" class="ti-heart"></i>
+		</div>
+	</footer>
+	<script src="{% static 'landing/assest/js/jquery-2.2.4.min.js' %}"></script>
+	<script src="{% static 'landing/assest/js/popper.min.js' %}"></script>
+	<script src="{% static 'landing/assest/js/bootstrap.min.js' %}"></script>
+	<script src="{% static 'landing/assest/js/plugins.js' %}"></script>
+	<script src="{% static 'landing/assest/js/slick.min.js' %}"></script>
+	<script src="{% static 'landing/assest/js/footer-reveal.min.js' %}"></script>
+	<script src="{% static 'landing/assest/js/active.js' %}"></script>
+	<script>
+		//$(document).ready(function () {
+		   // if (screen.width <= 1024) {
+		    //    $(".imgx").hide();
+		    //}
+		    //else {
+//
+		    //    $(".imgx").show();
+		   // }
+		//});
+	</script>
+</body>
+
+</html>

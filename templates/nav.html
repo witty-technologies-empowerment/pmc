@@ -1,0 +1,113 @@
+<style>
+  .pmc-class {
+      text-align: center;
+      margin-top: 50px;
+  }
+  #amount {
+    width: 280px;
+    display: inline-block;
+  }
+  .username {
+    color: purple;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 30px;
+    font-weight: 400;
+  }
+  .image-cropper {
+    widows: 40px;
+    height: 40px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 50%;
+    border: 2px solid #aaa;
+}
+.profile-pic {
+  display: inline;
+  margin: 0 auto;
+  height: 100%;
+  width: auto;
+}
+.avatar {
+  vertical-align: middle;
+  width: 40px;
+  height:40px;
+  border-radius: 50%;
+  border: 2px solid #aaa;
+}
+</style>
+<nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand pmc-logo-head" href="{% url 'users:request' %}">PassMeCash</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'coming' link='users:request' %}">Home <span class="sr-only"></span></a>
+      </li>
+      <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Menu</a>
+    <div class="dropdown-menu">
+      <a class="dropdown-item" href="{% url 'coming' link='users:request' %}">Quick select</a>
+      <a class="dropdown-item" href="{% url 'coming' link='users:request' %}">View</a>
+      <a class="dropdown-item" href="{% url 'coming' link='users:request' %}">Something</a>
+      <div class="dropdown-divider"></div>
+      <a class="dropdown-item" href="tel:+23412345672">Talk to us</a>
+      <a class="dropdown-item" href="sms:+23412345666">Sms to us</a>
+      <a class="dropdown-item" href="mailto:mail.passmecaash@gmail.com">Mail us</a>
+    </div>
+  </li>
+    </ul>
+    <ul>
+      {% if profileView %}
+      {% if authenticated %}
+  <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
+    {{ user.username | title }} &nbsp;
+  </button>
+  <div class="btn-group dropleft">
+        {% if profile_image %}
+        {% for item in profile_image %}
+        <div class="image-croppear">
+        <img src="{{ item.picture.url }}" alt="avatar" class="avatar">
+        </div> &nbsp; &nbsp;
+        {% endfor %}
+        {% endif %}
+  <div class="dropdown-menu">
+    <!-- Dropdown menu links -->
+          <a class="dropdown-item" href="{% url 'coming' link='users:request' %}">Account</a>
+          <a class="dropdown-item" href="{% url 'coming' link='users:request' %}">Activities</a>
+          <a class="dropdown-item" href="{% url 'coming' link='users:request' %}">Settings</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="{% url 'logout' %}"> Logout</a>
+  </div>
+</div>
+{% else %}
+<a href="{% url 'accounts:user_login'  %}" class="btn btn-outline-success" >Login as {{username}}</a>
+{% endif %}
+{% else %}
+<button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
+    {{ user.username | title }} &nbsp;
+  </button>
+    <ul>
+  <div class="btn-group dropleft">
+        {% if profile_image %}
+        {% for item in profile_image %}
+        <div class="image-croppear">
+        <img src="{{ item.picture.url }}" alt="avatar" class="avatar">
+        </div> &nbsp; &nbsp;
+        {% endfor %}
+        {% endif %}
+  <div class="dropdown-menu">
+    <!-- Dropdown menu links -->
+          <a class="dropdown-item" href="{% url 'coming' link='users:request' %}">Account</a>
+          <a class="dropdown-item" href="{% url 'coming' link='users:request' %}">Activities</a>
+          <a class="dropdown-item" href="{% url 'coming' link='users:request' %}">Settings</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="{% url 'logout' %}"> Logout</a>
+  </div>
+</div>
+{% endif %}
+    </ul>
+  </div>
+</nav>

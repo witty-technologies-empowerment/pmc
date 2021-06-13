@@ -1,0 +1,113 @@
+{% include "agentbase.html" %}
+{% load staticfiles %}
+
+        <!-- Main row -->
+        <div class="row">
+          <!-- Left col -->
+          <section class="col-lg-7 connectedSortable">
+            <!-- Custom tabs (Charts with tabs)-->
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">
+                  <i class="fas fa-chart-pie mr-1"></i>
+                  Sales
+                </h3>
+                <div class="card-tools">
+                  <ul class="nav nav-pills ml-auto">
+                    <li class="nav-item">
+                      <a class="nav-link active" href="#revenue-chart" data-toggle="tab">Area</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="#sales-chart" data-toggle="tab">Donut</a>
+                    </li>
+                  </ul>
+                </div>
+              </div><!-- /.card-header -->
+              <div class="card-body">
+                <div class="tab-content p-0">
+                  <!-- Morris chart - Sales -->
+                  <div class="chart tab-pane active" id="revenue-chart"
+                       style="position: relative; height: 300px;">
+                      <canvas id="revenue-chart-canvas" height="300" style="height: 300px;"></canvas>                         
+                   </div>
+                  <div class="chart tab-pane" id="sales-chart" style="position: relative; height: 300px;">
+                    <canvas id="sales-chart-canvas" height="300" style="height: 300px;"></canvas>                         
+                  </div>  
+                </div>
+              </div><!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+
+
+            <!-- TO DO List -->
+            <!-- /.card -->
+          </section>
+          <!-- /.Left col -->
+          <!-- right col (We are only adding the ID to make the widgets sortable)-->
+          <section class="col-lg-5 connectedSortable">
+
+            <!-- Map card -->
+            <div class="col-md-13">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Request Progress </h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <div class="progress mb-3">
+                  <div class="progress-bar bg-success" role="progressbar" aria-valuenow="{{rating.rating}}" aria-valuemin="0"
+                       aria-valuemax="100" style="width: {{rating.rating}}%">
+                    <span class="sr-onlys">{{rating.rating}}% (Accepted)</span>
+                  </div>
+                </div>
+                <div class="progress mb-3">
+                  <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="{{rating3.rating}}" aria-valuemin="0"
+                       aria-valuemax="100" style="width: {{rating3.rating}}%">
+                    <span class="sr-onlys">{{rating3.rating}}% (Expired)</span>
+                  </div>
+                </div>
+                <div class="progress mb-3">
+                  <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="{{rating2.rating}}" aria-valuemin="0"
+                       aria-valuemax="100" style="width: {{rating2.rating}}%">
+                       <span class="sr-onlys">{{rating2.rating}}% (Declined)</span>
+                  </div>
+                </div>
+               </div>
+              <!-- /.card-body -->
+            </div>
+            
+            <!-- /.card -->
+          </div>
+<div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Account Balance </h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <div class="progress mb-3">
+                  <div class="progress-bar bg-success" role="progressbar" aria-valuenow="40" aria-valuemin="0"
+                       aria-valuemax="{{pec}}" style="width: {{pec}}%">
+                       {% if pec == '0' %}
+                    <span style="color: red;" class="sr-onlys">{{pec}}%</span>
+                    {% else %}
+                    <span class="sr-onlys">{{pec}}%</span>
+                    {% endif %}
+                  </div>
+                </div>
+                <p>Remit Balance -  <b>(N{{amt2}})</b> </p>
+                <!-- <p>Money Earn -  <b>(N{{amt2}})</b> </p>-->
+              </div>
+              <!-- /.card-body -->
+            </div>
+          </section>
+          <!-- right col -->
+        </div>
+        <!-- /.row (main row) -->
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+
+
+{% include "popup.html" %}
+
+{% include "dbase.html" %}

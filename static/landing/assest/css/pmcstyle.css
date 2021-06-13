@@ -1,0 +1,106 @@
+/*.backgroundx { 
+    background-color: blueviolet !important;
+    width: 100%;
+    height: auto;
+}*/
+html, body {
+    height: 100%;
+    color: #fff !important;
+  }
+
+.backgroundx {
+    position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+	width: 100%;
+	padding: 45px;
+    
+    background: #a865e1;
+    background: -webkit-linear-gradient(to left, #7873ed, #a865e1);
+    background: -webkit-linear-gradient(right, #7873ed, #a865e1);
+    background: -webkit-gradient(linear, right top, left top, from(#7873ed), to(#a865e1));
+    background: -o-linear-gradient(right, #7873ed, #a865e1);
+    background: linear-gradient(to left, #7873ed, #a865e1);
+    height: 100%;
+  }
+
+.center {
+margin: 0;
+position: absolute;
+top: 50%;
+left: 50%;
+-ms-transform: translate(-50%, -50%);
+transform: translate(-50%, -50%);
+color: #fff !important;
+text-align: center;
+}
+
+.pmctext {
+    color: #fff !important;
+}
+
+.backgroundx input {
+    padding: 5px;
+	margin-bottom: 30px;
+	width: 55%;
+	box-sizing: border-box;
+	box-shadow: none;
+	outline: none;
+	border:none;
+	border-bottom: 2px solid #999;
+}
+
+.backgroundx input[type="submit"]
+{
+	border-radius: 25px;
+	font-size: 20px;
+	height: 40px;
+	cursor : pointer;
+	background: rgb(66,133,244);
+	color: #fff;
+	margin-bottom: 0;
+}
+.backgroundx input[type="submit"]:hover
+{
+	background: #34F458;
+	color: #fff;
+}
+.backgroundx form div
+{
+	position: relative;
+}
+.backgroundx form div label
+{
+	position: absolute;
+	top: 3px;
+	pointer-events: none;
+	left: 0;
+	transition: .5s;
+}
+.backgroundx input:focus ~label,
+.backgroundx input:valid ~label
+{
+	left: 0;
+	top: -20px;
+	color: rgb(66,133,244);
+	font-size: 12px;
+	font-weight: bold;
+}
+.backgroundx input:focus,
+.backgroundx input:valid
+{
+	border-bottom: 2px solid rgb(66,133,244);
+}
+.error_form
+{
+	top: 12px;
+	color: rgb(216, 15, 15);
+    font-size: 15px;
+    font-family: Helvetica;
+}
+.pmc-logo {
+	height:54px;
+	width:158px;
+	padding-left:45px
+}

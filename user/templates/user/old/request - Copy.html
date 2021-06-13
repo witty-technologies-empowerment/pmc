@@ -1,0 +1,266 @@
+{% include "base.html" %}
+{% load staticfiles %}
+<script>
+  var fillInPage = (function () {
+      var updateCityText = function (geoipResponse) {
+  
+          var link = "/shelter?lat=" + geoipResponse.location.latitude;
+          link += "&lon=" +geoipResponse.location.longitude;
+  
+          /* It's possible that we won't have any names for this city */
+          var cityName = geoipResponse.city.names.en || 'your city';
+  
+          /*
+             most_specific_subdivision returns the smallest available
+             subdivision (region) as defined in ISO 3166-2.
+          */
+          var regionName = geoipResponse.most_specific_subdivision.names.en;
+          var code = geoipResponse.country.iso_code;
+          console.log(geoipResponse);
+          var cityHTML =
+              '<span>'
+              + cityName;
+  
+          if (cityName && code ) {
+              cityHTML += ', ' + code;
+          }
+          cityHTML += '</span>.';
+  
+          $("#city").html(cityHTML);
+      };
+  
+      var onSuccess = function (geoipResponse) {
+          updateCityText(geoipResponse);
+      };
+  
+      /* If we get an error we will */
+      var onError = function (error) {
+          return;
+      };
+  
+      return function () {
+          geoip2.city( onSuccess, onError );
+      };
+  }());
+  
+  fillInPage();
+</script>
+
+
+<body>
+  <!-- minifycode.com to compress codes HTML, JS, CSS -->
+  <!-- search by Angolia-->{% if messages %} {% for message in messages %}
+  <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert"> <strong>{{ user.username | title }}</strong> {{ message }} <a href="#" onclick="locationGet()">reload</a>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">&times;</span>
+    </button>
+  </div>{% endfor%} {% endif %} {% if errordict1 %} {% for error in errordict1 %}
+  <script>
+    swal({
+          title: "{{ error.title }}",
+          text: "{{ error.message }}",
+          icon: "error",
+          timer: 3000,
+          });
+  </script>{% endfor %} {% endif %} {% if errordict %} {% for error in errordict %}
+  <script>
+    swal({
+          title: "{{ error.title }}",
+          text: "{{ error.message }}",
+          icon: "warning",
+          });
+  </script>{% endfor %} {% endif %}
+  <div class="pmc-class jumbotron">
+    <h1 class="display-6 pmc-text-add">Welcome, <span>{{ user.username | title }}</span></h1>
+    <p class="lead">Enter an amount below to place a request.</p>
+    <!-- <p>{{ user.first_name | title }} {{user.last_name}} {{user.username}} {{user.email }} {% for data in telephone %} {{ data.telephone }} {% endfor %}</p> -->
+    <hr class="my-4">
+   <form action="" method="POST" name="request">
+      {% csrf_token %}
+      <div class="form-group inputWithIcon">
+        <input type="text" class="form-control animated pulse delay-1s slow" id="amount" name="amount">
+        <i class="inputIcon error" aria-hidden="true"><img src="{% static 'user/icon/essential/png/warning.png' %}" width="22" height="22"></i>
+       <span class="error">You did not input amount</span>
+      </div>{% if gcity %}
+      <p>Your Location : <i id="locationGet">{{ gcity }}</i>  <small><a href="#" onclick="locationGet()"><i>Not Here</i></a></small>
+      </p>{% else %}
+      <p>Your Location : <i id="city">Nil</i>  <a href="#"><i><small style="color: red">Not here</small></i></a>
+      </p>{% endif %}
+      <button type="submit" id="myBtn" class="btn btn-lg btn-outline-primary">&nbsp &nbsp Request &nbsp &nbsp</button>
+    </form>
+  </div>
+  <hr class="my-4">
+  <div class="pmc-class jumbotron">
+    <h4>Quick Select</h4>
+    <br>
+    <p class="" style="text-align: center">Select from the list of avilable cash list <sup><strong>NOTE</strong> N100 will be charged on every N1000</sup>
+    </p> <a class="btn btn-lg btn-outline-primary" href="{% url 'users:agent_list' amount=1000 %}">&nbsp &nbsp 1,000<sup style="color: red; opacity: 0.5">100</sup>&nbsp &nbsp </a> &nbsp <a class="btn btn-lg btn-outline-primary" href="{% url 'users:agent_list' amount=2000 %}">&nbsp &nbsp 2,000<sup style="color: red; opacity: 0.5">200</sup>&nbsp &nbsp</a> &nbsp <a class="btn btn-lg btn-outline-primary" href="{% url 'users:agent_list' amount=3000 %}">&nbsp &nbsp 3,000<sup style="color: red; opacity: 0.5">300</sup>&nbsp &nbsp</a> &nbsp <a class="btn btn-lg btn-outline-primary" href="{% url 'users:agent_list' amount=4000 %}">&nbsp &nbsp 4,000<sup style="color: red; opacity: 0.5">400</sup>&nbsp &nbsp</a> &nbsp <a class="btn btn-lg btn-outline-primary" href="{% url 'users:agent_list' amount=5000 %}">&nbsp &nbsp 5,000<sup style="color: red; opacity: 0.5">500</sup>&nbsp &nbsp</a> &nbsp <a class="btn btn-lg btn-outline-primary" href="{% url 'users:agent_list' amount=10000 %}">&nbsp &nbsp 10,000<sup style="color: red; opacity: 0.5">500<sup>+</sup></sup>&nbsp &nbsp</a>
+ 
+{% if error %}
+{% for item in error %}
+{% if item.v1 == 1 %}
+<script>
+    swal({
+      title: "{{ item.v2 }}",
+      text: "{{ item.v3 }}",
+      icon: "error",
+});
+</script>
+{% elif item.v1 == 2 %}
+<script>
+    swal({
+      title: "{{ item.v2 }}",
+      text: "{{ item.v3 }}",
+      icon: "warning",
+});
+</script>
+{% elif item.v1 == 3 %}
+<script>
+    swal({
+      title: "{{ item.v2 }}",
+      text: "{{ item.v3 }}",
+      icon: "success",
+});
+</script>
+{% endif %}
+{% endfor %}
+{% endif %}
+</div>
+
+  <!-- Footer -->
+
+    <footer class="pt-4 pb-0" id="contact">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-3 col-md-6 col-sm-6 mt-2 mb-0">
+            <h5 class="mb-4 font-weight-bold">PassMeCash</h5>
+            <p class="mb-4">A Platform built to help poeple in all areas to accesss funds with easy.
+            With PMC you can be any where and get your fundz directly to you </p>
+            <h6 class="font-weight-normal mb-0 pb-1">Useful Links:</h6>
+            <li class="ml-4"><a href="">My Profile</a></li>
+            <li class="ml-4"><a href="">Resent Activity</a></li>
+            <li class="ml-4"><a href="">Blog</a></li>
+            <li class="ml-4"><a href="">Help</a></li>
+            <li class="ml-4"><a href="">FAQ<sup>+</sup></a></li>
+            <li class="ml-4"><a href="">Help</a></li>
+            <li class="ml-4"><a href="">Terms and Services</a></li>
+          </div>
+          <div class="col-lg-3 col-md-6 col-sm-6 mt-2 mb-0">
+            <h5 class="mb-4 font-weight-bold">About Us</h5>
+            <p class="mb-4">Want to know PassMeCash</p>
+            <ul class="f-address">
+              <li>
+                <div class="row">
+                  <div class="col-1"><i class="fas fa-map-marker"></i></div>
+                  <div class="col-10">
+                    <h6 class="font-weight-bold mb-0">Address:</h6>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="row">
+                  <div class="col-1"><i class="far fa-envelope"></i></div>
+                  <div class="col-10">
+                    <h6 class="font-weight-bold mb-0">Have any questions?</h6>
+                    <p><a href="mailto:">help@passmecash.com</a></p>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="row">
+                  <div class="col-1"><i class="fas fa-phone-volume"></i></div>
+                  <div class="col-10">
+                    <h6 class="font-weight-bold mb-0">Phone:</h6>
+                    <p><a href="tel:">+XX (0) XX XX-XXXX-XXXX</a></p>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="col-lg-3 col-md-6 col-sm-6 mt-2 mb-0">
+            <h5 class="mb-4 font-weight-bold">Latest News</h5>
+            <ul class="recent-post">
+              <li>
+                <label class="mr-3">28 <br><span>APR</span></label>
+                <span>Rendomised words which dont look eveable.</span>
+              </li>
+              <li>
+                <label class="mr-3">29 <br><span>APR</span></label>
+                <span>Rendomised words which dont look eveable.</span>
+              </li>
+              <li>
+                <label class="mr-3">30 <br><span>APR</span></label>
+                <span>Rendomised words which dont look eveable.</span>
+              </li>
+            </ul>
+          </div>
+          <div class="col-lg-3 col-md-6 col-sm-6 mt-2 mb-4">
+            <h5 class="mb-4 font-weight-bold">Connect With US</h5>
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Your Email Address">
+                <span class="input-group-addon" id="basic-addon2"><i class="fas fa-check"></i></span>
+            </div>
+            <ul class="social-pet mt-4">
+              <li><a href="{% url 'coming' link='users:request' %}" title="facebook"><i class="fab fa-facebook-f"></i></a></li>
+              <li><a href="{% url 'coming' link='users:request' %}" title="twitter"><i class="fab fa-twitter"></i></a></li>
+              <li><a href="{% url 'coming' link='users:request' %}" title="google-plus"><i class="fab fa-google-plus-g"></i></a></li>
+              <li><a href="{% url 'coming' link='users:request' %}" title="instagram"><i class="fab fa-instagram"></i></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- Copyright -->
+    <section class="copyright">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 ">
+            <div class="text-center text-white">
+              &copy; 2019 PassMeCash. All Rights Reserved. Powered by WittyTechFoundation
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  <script>
+    $(document).ready(function() {
+          var input = document.getElementsByTagName("input")[1];
+          var att = document.createAttribute("placeholder");
+          var att2 = document.createAttribute("style");
+          var att3 = document.createAttribute("minlength");
+          var att4 = document.createAttribute("maxlength");
+          att.value = "Enter Amount ";
+          att2.value = "text-align: center";
+          att3.value = "4";
+          att4.value = "5";
+          input.setAttributeNode(att);
+          input.setAttributeNode(att2);
+          input.setAttributeNode(att3);
+          input.setAttributeNode(att4);
+     });
+
+    //document.getElementById("myBtn").addEventListener("click", function(){
+      //var inputVal = document.getElementById("amount").value;
+      //url = 'request/agents/above/' 
+      //url += document.request.amount.value + '/' +amount;
+      //window.location= url;
+      //console.log(url);
+   //   console.log(inputVal);
+///});
+    var seach = document.getElementsByTagName("input")[7];
+    var span = document.getElementsByTagName("span")[3];
+    var input = document.getElementsByTagName("input")[0];
+    var attsearch = document.createAttribute("placeholder");
+    var att = document.createAttribute("placeholder");
+    var att2 = document.createAttribute("class");
+      attsearch.value = "Search";
+      att2.value = "username";
+      att.value = "Enter amount needed";
+      seach.setAttributeNode(attsearch);
+      input.setAttributeNode(att);
+      span.setAttributeNode(att2);
+  </script>
+</body>
+
+</html>

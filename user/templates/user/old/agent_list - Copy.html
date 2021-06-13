@@ -1,0 +1,53 @@
+{% include "base.html" %}
+{% load staticfiles %}
+<body>
+  <!-- search by Angolia-->
+  {% if messages %}
+  {% for message in messages %}
+  <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+      <strong>{{ user.username | title }}</strong> {{ message }} <a href="#" onclick="locationGet()">reload</a>
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    {% endfor%}
+    {% endif %}
+  <div class="pmc-class jumbotron">
+      <h1 class="element-6 display-6"><span>{{ user.username | title }}</span>,<br> <span style="font-size: 24px">Please Select an Agent</span></h1>
+      <p class="lead"><a href="#">View list on a Map <img src="{% static 'user/icon/essential/png/placeholder.png' %}" alt="rating-star" width="26" height="26"></a></p>
+    <hr class="my-4">
+      <div class="Container PMC_" style="overflow: hidden;">
+      	{% if all_listx %}
+          {% for details in all_listx %}
+      	
+        <div class="card animated lightSpeedIn" style="width:350px; float:left; margin: 10px;">
+        	{% if details.agent_image %}
+        	{% for item in details.agent_image %}
+        	<img class="card-img-top" src="{{item.picture.url}}" alt="Card image" style="width:100%">
+        	{% endfor %}
+        	{% else %}
+    		<img class="card-img-top" src="{% static 'user/img/img_avatar1-1.png' %}" alt="Card image" style="width:100%">
+    		{% endif %}
+    <div class="card-body" style="border-top: 2px solid #aaa ">
+      <h4 class="card-title">{{ details.agent_fName | title }} {{ details.agent_lName | title }} </h4>
+      <div class="card_items"><small><i>Last Time Active <span>Thur 10, October 2019</span></i></small></div>
+      {{ details.agent_name | title }}<br>
+        	{% if details.agent_rating %} {% for item in details.agent_rating %} {% if item.average_rating == '0' %}<p>This agent has not done nor completed any transaction</p> {% elif item.average_rating == '100' %} <img src="{%static 'star.svg' %}" width="12" height="12" alt=""> <img src="{%static 'star.svg' %}" width="12" height="12" alt=""> <img src="{%static 'star.svg' %}" width="12" height="12" alt=""> <img src="{%static 'star.svg' %}" width="12" height="12" alt=""> <img src="{%static 'star.svg' %}" width="12" height="12" alt="">{% elif item.average_rating > '80' %} <img src="{%static 'star.svg' %}" width="12" height="12" alt=""> <img src="{%static 'star.svg' %}" width="12" height="12" alt=""> <img src="{%static 'star.svg' %}" width="12" height="12" alt=""> <img src="{%static 'star.svg' %}" width="12" height="12" alt=""> <img src="{%static 'star.svg' %}" width="12" height="12" alt=""> {% elif item.average_rating > '60' %} <span> <img src="{%static 'star.svg' %}" width="12" height="12" alt=""> <img src="{%static 'star.svg' %}" width="12" height="12" alt=""> <img src="{%static 'star.svg' %}" width="12" height="12" alt=""> <img src="{%static 'star.svg' %}" width="12" height="12" alt=""> {% elif item.average_rating > '40' %} <span> <img src="{%static 'star.svg' %}" width="12" height="12" alt=""> <img src="{%static 'star.svg' %}" width="12" height="12" alt=""> <img src="{%static 'star.svg' %}" width="12" height="12" alt=""> {% elif item.average_rating > '20' %} <span> <img src="{%static 'star.svg' %}" width="12" height="12" alt=""> <img src="{%static 'star.svg' %}" width="12" height="12" alt=""> {% else %} <span> <img src="{%static 'star.svg' %}" width="12" height="12" alt=""> {% endif %} {% endfor %} {% else %}<p style="border: 2px dotted red;border-radius: 3px">This agent is yet to completed any transaction</p> {% endif %}
+      <p class="card-text" title="Show on Map"><i class="flaticon-placeholder-3 PMC_icon_location"></i> {{ details.agent_location | title }}</p>
+      <p class="card-text"><i class="flaticon-phone-call PMC_icon_location"></i> 
+      	<a href="." class="" type="submit"> View on map</a></p>
+      <form action="{% url 'users:agent_selected' details=details.agent_name RCode=details.RCode amount=details.amount_request sent=details.sent others=details %}" method="POST">
+      {% csrf_token %}
+        <button type="submit" class="btn btn-primary"> &nbsp  &nbsp Select<i class="flaticon-next-1"></i> &nbsp </button>
+      <!--<a href="#" class="btn btn-primary"> &nbsp  &nbsp Select<i class="flaticon-next-1"></i> &nbsp </a> -->
+      </form>
+    </div>
+  </div>
+          {% endfor %}
+          {% else %}
+          <div class="no_agent animated wobble">There are no agent Avaliable</div>
+          {% endif %}
+      </div>
+    </div>
+</body>
+</html>

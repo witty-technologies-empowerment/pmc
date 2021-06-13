@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load staticfiles %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>PMC | Login up</title>
+
+    <!-- Font Icon -->
+    <link rel="stylesheet" href="{% static 'accounts/form/fonts/material-icon/css/material-design-iconic-font.min.css' %}">
+
+    <!-- Main css -->
+    <link rel="stylesheet" href="{% static 'accounts/main/css/form.css' %}">
+
+    <!-- Form css -->
+    <link rel="stylesheet" href="{% static 'accounts/form/css/style.css' %}">
+
+        <!-- Sweet Alert -->
+    <script src="{% static 'vendor/sweetalert/sweetalert.min.js' %}"></script>
+
+    <link href="{% static 'vendor/flickity/css/added.css' %}" rel="stylesheet">
+</head>
+<body>
+<div>
+    <p class="pmc_text pmc-logo-head">PMC</p>
+</div>
+<!-- Sing in  Form -->
+<section class="sign-in">
+    <div class="container">
+        <div class="signin-content">
+            <div class="signin-image">
+                <figure><img src="{% static 'accounts/form/images/signin-image.jpg' %}" alt="sing up image"></figure>
+                <a style="background-color: purple;padding: 5px;border-radius: 3px;color: #FFF;" href="{% url 'agents:register' %}" class="signup-image-link">Create an agent account</a>
+            </div>
+
+            <div class="signin-form">
+            	{% if verified == 2 %}
+                <h2 class="form-title" style="text-align: center;">Sign in</h2>
+                <h1 style="text-align: center;color: purple;margin-bottom: 15 px;"><small><i>Finial signup step Login to get into action</i></small></h1>
+                <form method="POST" class="register-form" id="register_form" action="{% url 'agents:new_agent_login' username=username %}" enctype="multipart/form-data">
+                  <!-- ** Form Security Start Here **-->
+                  {% csrf_token %}
+                  <!-- ** Form Security End Here **-->
+                    <div class="form-group">
+                        <label for="username"><i class="zmdi zmdi-sign-in material-icons-name"></i></label>
+                        <input type="text" name="username" id="username" placeholder="Username"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="password"><i class="zmdi zmdi-lock"></i></label>
+                        <input type="password" name="password" id="password" placeholder="Password"/>
+                    </div>
+                    <div class="form-group">
+                        <input type="checkbox" name="remember-me" id="remember-me" class="agree-term" />
+                        <label for="remember-me" class="label-agree-term"><span><span></span></span>Remember me</label>
+                    </div>
+                    <div class="form-group form-button">
+                        <input type="submit" name="signin" id="signin" class="form-submit" value="Log in"/>
+                    </div>
+                </form>
+                <div class="social-login">
+                    <span class="social-label">Or login with</span>
+                    <ul class="socials">
+                        <li><a href="#"><i class="display-flex-center zmdi zmdi-facebook"></i></a></li>
+                        <li><a href="#"><i class="display-flex-center zmdi zmdi-twitter"></i></a></li>
+                        <li><a href="#"><i class="display-flex-center zmdi zmdi-google"></i></a></li>
+                    </ul>
+                </div>
+                {% elif verified == 1  %}
+                <h3 class="form-title" style="text-align: center;font-size: 30px">Verify your phone</h3>
+                <h1 style="text-align: center;color: purple;margin-bottom: 15px;"><small><i>Enter the verification code sent to {{ shrtel }}.</i></small></h1>
+                <form method="POST" class="register-form" id="register_form" action="{% url 'agents:new_agent_login' username=username %}" enctype="multipart/form-data">
+                  <!-- ** Form Security Start Here **-->
+                  {% csrf_token %}
+                  <!-- ** Form Security End Here **-->
+                    {% if message2 %}
+                    <h1 style="text-align: center;color: red;margin-bottom: 15px;"><small><i>{{ message }}</i></small>
+                    <div class="form-group">
+                        <label for="otp"><i class="zmdi zmdi-sign-in material-icons-name"></i></label>
+                        <input type="text" name="otp" id="id_otp" {{disabled}} placeholder="{{otp}} has been used"/> 
+                    </div>
+                    {% else %}
+                    <div class="form-group">
+                        <label for="otp"><i class="zmdi zmdi-sign-in material-icons-name"></i></label>
+                        <input type="text" name="otp" id="id_otp" placeholder="Enter code sent to {{ shrtel }}"/>
+                    </div>
+                    <div class="form-group form-button">
+                        <input type="submit" name="verify" id="signin" class="form-submit" value="Verify"/>
+                    </div>
+                    {% endif %}
+                </form>
+                {% else %}
+                <h3 class="form-title" style="text-align: center;font-size: 30px">create a new agent account</h3>
+                <a style="background-color: purple;padding: 5px;border-radius: 3px;color: #FFF;" href="{% url 'agents:register' %}" class="signup-image-link">Create an account</a>1>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+{% if message %}
+<script>
+swal({
+  title: "Verification completed!",
+  text: "{{ message }}",
+  icon: "success",
+});
+</script>
+</body>
+</html>
+{% endif %}
+{% if message1 %}
+<script>
+swal({
+  title: "Verification Error!",
+  text: "{{ message1 }}",
+  icon: "error",
+});
+</script>
+</body>
+</html>
+{% endif %}
+{% if message2 %}
+<script>
+swal({
+  title: "Verification Error!",
+  text: "{{ message2 }}",
+  icon: "warning",
+});
+</script>
+</body>
+</html>
+{% endif %}
+</body>
+</html>

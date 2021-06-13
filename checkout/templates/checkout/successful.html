@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	{% load staticfiles %}
+	<title>PMC Payment Checkout</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="{% static 'images/icons/favicon.ico' %}"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'fonts/iconic/css/material-design-iconic-font.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/animate/animate.css' %}">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/css-hamburgers/hamburgers.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/animsition/css/animsition.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/select2/select2.min.css' %}">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/daterangepicker/daterangepicker.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'css/util.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+<!--===============================================================================================-->
+</head>
+<body>
+	
+	<div class="limiter">
+		<div class="container-login100" style="background-image: url({% static 'images/bg-01.jpg' %});">
+			<div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
+				<form class="login100-form validate-form" action="." method="POST" onsubmit="return false">
+					{% csrf_token %}
+					<span class="login100-form-title p-b-49">
+						Payment Successful
+					</span>
+					<p>Your request transaction has been completed, You can now connect with the agent to recieve your cash</p>
+					<p>When you recieve the cash simple click the <b style="color:#000">Cash Recieved</b> below.</p>
+					<p>If you did not recieve your cash request for a refund</p>
+					<br>
+					<br>
+					{% if details %}
+					{% for item in details %}
+					<pre style="color: black;text-align: center;font-size: 20px;"><strong>Contact Your Agent</strong></pre>
+					<p>Agent Username - <strong>{{ item.username | title }}</strong></p>
+					<p>Agent Full Name - <strong>{{ item.first_name | title }} {{ item.last_name | title }}</strong></p>
+					<p>Agent Address - <strong>{% for item in address %}{{ item.street | title }}, {{ item.city | title }}, {{ item.state | title }}{% endfor %}</strong></p>
+					{% for itemz in telephone %}
+					<p>Agent Telephone - call <strong><a style="color:#00dbde;border-bottom: 2px dotted #fc00ff;" href="tel:{{ itemz.telephone }}">{{ itemz.user | title }}</a></strong>   or   sms <strong><a style="color:#00dbde;border-bottom: 2px dotted #fc00ff;" href="sms:{{ itemz.telephone }}">{{ itemz.user | title }}</a></strong></p>
+					{% endfor %}
+					<br>
+					<div class="container-login100-form-btnx">
+						<div class="wrap-login100-form-btnx">
+							<div class="login100-form-bgbtnx"></div>
+							<button class="login100-form-btnx">
+								
+							</button>
+						</div>
+					</div>
+					<br>
+					<br>
+					<br>
+					<pre style="color: black;text-align: center;font-size: 20px;"><strong>Click only if you have recieve cash</strong></pre>
+					<div class="container-login100-form-btnx">
+						<div class="wrap-login100-form-btnx">
+							<div class="login100-form-bgbtnx"></div>
+							<button class="login100-form-btnx" onclick="goCal()">
+								Cash Recieved
+							</button>
+						</div>
+					</div>
+					<br>
+					<div class="container-login100-form-btnx">
+						<div class="wrap-login100-form-btnx">
+							<div class="login100-form-bgbtnx"></div>
+							<button class="login100-form-btnx">
+								Scan agent code
+							</button>
+						</div>
+					</div>
+					<br>
+					< <button type="submit" onclick="goHome()" value="Home">Go back Home</button>
+					{% endfor %}
+					{% else %}
+					<strong>{{ note }}</strong>
+					<br>
+					 Go > <a href="{% url 'users:request' %}">Home</a>
+					{% endif %}
+				</form>
+			</div>
+		</div>
+	</div>
+	
+
+	<div id="dropDownSelect1"></div>
+	
+<!--===============================================================================================-->
+	<script>
+function goHome(){
+	alert('You will not be able to view this page again .... are you sure you want to go back');
+	window.location.replace("http://passmecash.com/users/request/");
+}
+
+function goCal(){
+	window.location.replace("http://passmecash.com/checkout/payment/!/done/{{pattern}}/");
+}
+	</script>
+<!--===============================================================================================-->
+	<script src="{% static 'vendor/jquery/jquery-3.2.1.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'vendor/animsition/js/animsition.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'vendor/bootstrap/js/popper.js' %}"></script>
+	<script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'vendor/select2/select2.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'vendor/daterangepicker/moment.min.js' %}"></script>
+	<script src="{% static 'vendor/daterangepicker/daterangepicker.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'vendor/countdowntime/countdowntime.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'js/main.js' %}"></script>
+
+</body>
+</html>

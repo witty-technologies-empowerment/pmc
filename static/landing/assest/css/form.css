@@ -1,0 +1,62 @@
+.pmc_jumbotron{
+    left: 30%;
+    top: 5%;
+    position: relative;
+    text-align: center;
+    transform: translateX(-60%);
+    transform: translateY(5%);
+    border-radius: 9px;
+    width: 400px;
+    height: 500px;
+  }
+
+
+  .form-control::-webkit-input-placeholder {
+    color: #cec1f4;
+    opacity: 1;
+}
+
+.form-control:-ms-input-placeholder {
+    color: #cec1f4;
+    opacity: 1;
+}
+
+.form-control::-ms-input-placeholder {
+    color: #cec1f4;
+    opacity: 1;
+}
+
+.form-control::placeholder {
+    color: #cec1f4;
+    opacity: 1;
+}
+
+
+#id_username,
+#id_first_name,
+#id_last_name,
+#id_email,
+#id_telephone,
+#id_password,
+#id_re_type_password {
+  font-size: 18px;
+  padding: 15px 15px;
+  border-radius: 25px 25px 25px 0;
+}
+
+.btn.submit-btn {
+  background: #fb397d;
+  height: 48px;
+  min-width: 185px;
+  color: #ffffff;
+  font-weight: 500;
+  border-radius: 22px 25px 22px 0;
+}
+
+.btn.submit-btn:hover {
+  background: #5b32b4;
+  color: #fff;
+  -webkit-transition-duration: 500ms;
+  -o-transition-duration: 500ms;
+  transition-duration: 500ms;
+}

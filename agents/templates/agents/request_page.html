@@ -1,0 +1,98 @@
+{% include "base2-2.html" %}
+{% load staticfiles %}
+<body>
+	<section class="centered">
+{% if visited == 'section1' %}
+<div class="typewriter">
+	  <h2>Transaction in Progress</h2>
+	</div>
+      <p style="text-align:center;background-color:#1ceace; width:100%; padding:3px;">You have to Accept or Decline <i>Within the next 5 Minute</i></p>
+      {% if RCode %}
+        <p>Transaction ID: {{ RCode }}</p>
+        {% endif %}
+      {% if RTime %}
+        <p>Requested Time: {{ RTime }}</p>
+        {% endif %}
+      {% if currentTime %}
+        <p>Current Time: <span id="currentTime"></span></p>
+        {% endif %}{% if ndata %}
+        <p>Time till Request Expires: {{ ndata }} Time Left: <span style="color: blue" id="timeLeft"> </span></p>
+        {% endif %}
+      {% if requested %}
+        <p>Customer: {{ requested | title }}</p>
+        {% endif %}
+      {% if amount %}
+        <p>Amount needed: {{ amount }}</p>
+        {% endif %}
+      	<form action="{% url 'agents:response' value='accept' num=num RCode=RCode %}" method="POST">
+          {% csrf_token %}
+          <input type="submit" name="accept" value="Accept">
+      </form>
+      <form action="{% url 'agents:response' value='decline' num=num RCode=RCode %}" method="POST">
+          {% csrf_token %}
+          <input type="submit" name="decline" value="Decline">
+      </form>
+      {% elif visited == 'section2' %}
+      <div class="typewriter">
+	  <h2>Transaction Completed</h2>
+	</div>
+      <p style="text-align:center;background-color: #f32013; width:100%; padding:3px;">You have either <strong><i>(Accept or Decline)</i></strong> this request.</p>
+          <p>Transaction ID: {{ RCode }}</p>
+          <p>Requested Time: {{ RTime }}</p>
+           <p>Current Time: <span id="currentTime"></span></p>
+          <p>Time till Request Expires: {{ ndata }} Time Left: <span id="timeLeft"> </span></p>
+          <p>Customer: {{ requested | title }}</p>
+          <p>Amount needed: {{ amount }}</p>
+      {% elif visited == 'section3' %}
+      <div class="typewriter">
+	  <h2>Transaction Expired</h2>
+	</div>
+      <p style="text-align:center;background-color:#FAD201; width:100%; padding:3px;">You did not <strong><i>(Accept or Decline)</i></strong> this request <strong><i>and the Request time has Expired!</i></strong>
+      </p>
+      <p>Transaction ID: {{ RCode }}</p>
+          <p>Requested Time: {{ RTime }}</p>
+           <p>Current Time: <span id="currentTime"></span></p>
+          <p>Time till Request Expires: {{ ndata }} Time Left: <span id="timeLeft"> </span></p>
+          <p>Customer: {{ requested | title }}</p>
+          <p>Amount needed: {{ amount }}</p>
+      {%endif%}
+</section>
+  <!-- search by Angolia-->
+  	<script>
+  		let ndate = moment().format('ll');
+  		console.log(ndate)
+  		let nowTime = moment().format('h:mm:ss a');
+  		document.getElementById("currentTime").innerHTML = nowTime;
+// Set the date we're counting down to
+var countDownDate = new Date("{{rDate}} {{ ndata }}").getTime();
+
+// Update the count down every 1 second
+var x = setInterval(function() {
+
+  // Get today's date and time
+  var now = new Date().getTime();
+    
+  // Find the distance between now and the count down date
+  var distance = countDownDate - now;
+    
+  // Time calculations for days, hours, minutes and seconds
+  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    
+  // Output the result in an element with id="demo"
+  document.getElementById("timeLeft").innerHTML = days + "d " + hours + "h "
+  + minutes + "m " + seconds + "s ";
+    
+  // If the count down is over, write some text 
+  if (distance < 0) {
+    clearInterval(x);
+    document.getElementById("timeLeft").innerHTML = "<b style='Color:red;''> EXPIRED </b>";
+  }
+}, 1000);
+</script>
+
+</body>
+</html>
+

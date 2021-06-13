@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load staticfiles %}
+	{% if time %}
+    <meta http-equiv="refresh" content="{{time}}"/>
+    {% else %}
+    <meta http-equiv="refresh" content="10000"/>
+    {% endif %}
+    <meta charset="UTF-8">
+    <title>Request | </title>
+      <!-- sweetalert-docs -->
+  <script src="{% static 'vendor/sweetalert/sweetalert.min.js' %}"></script>
+</head>
+    <style>
+    .centered{position:fixed;top:24%;left:33.5%;margin-top:-50px;margin-left:-100px;width:600px;height:400px;background-color:red;border:2px white solid;border-radius:8px;padding:5px;opacity:0.8}
+    </style>
+<body>
+{% if error %}
+<br>
+<h4 style="color:white;font-size: 20px;text-align:center;background-color:red; width:80%;margin: 20px; padding:3px;">
+    {{error}}
+</h4>
+{% endif %}
+<section class="centered">
+    Hello; {{user.username}} <br>
+</section>
+{% for item in list %}
+{% if item.v1 == 0 %}
+<script>
+    swal("Here's the title!", "...and here's the text!");
+</script>
+</body>
+</html>
+{% elif item.v1 == 1 %}
+<script>
+swal({title:"{% if agent %}{{agent}}{% endif %}",text:"... Please wait {% if agent %}{{agent}}{% endif %}",timer:3000,});
+</script>
+</body>
+</html>
+{% elif item.v1 == 2 %}
+<script>
+    swal("Good job!", "You clicked the button! {% if num %}{{num}}{% endif %}", "info");
+</script>
+</body>
+</html>
+{% elif item.v1 == 3 %}
+<script>
+    swal("Good job!", "You clicked the button! {% if num %}{{num}}{% endif %}", "warning");
+</script>
+</body>
+</html>
+{% elif item.v1 >= 4 %}
+<script>
+    swal("Good job!", "You clicked the button! {% if num %}{{num}}{% endif %}", "error");
+</script>
+</body>
+</html>
+{% endif %}
+{% endfor %}
+
+
+{% if amount %}
+{% if declined %}
+<a href="{% url 'users:agent_list' amount=amount %}">{{ declined }} </a>
+{% endif %}
+{% endif %}
+
